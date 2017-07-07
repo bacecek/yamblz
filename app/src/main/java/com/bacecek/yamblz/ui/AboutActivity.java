@@ -1,4 +1,4 @@
-package com.bacecek.yamblz;
+package com.bacecek.yamblz.ui;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -10,6 +10,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bacecek.yamblz.BuildConfig;
+import com.bacecek.yamblz.R;
+import com.bacecek.yamblz.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

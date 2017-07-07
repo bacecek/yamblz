@@ -1,4 +1,4 @@
-package com.bacecek.yamblz;
+package com.bacecek.yamblz.utils;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;

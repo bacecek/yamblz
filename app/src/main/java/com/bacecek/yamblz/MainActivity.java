@@ -1,5 +1,6 @@
 package com.bacecek.yamblz;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +21,11 @@ public class MainActivity extends AppCompatActivity {
     Toolbar mToolbar;
     @BindView(R.id.layout_drawer)
     DrawerLayout mDrawerLayout;
+
+    @OnClick(R.id.txt_about)
+    void onClickAbout() {
+        startActivity(new Intent(this, AboutActivity.class));
+    }
 
     private ActionBarDrawerToggle mActionBarToggle;
 

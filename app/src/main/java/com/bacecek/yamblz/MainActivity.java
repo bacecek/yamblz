@@ -27,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, AboutActivity.class));
     }
 
+    @OnClick(R.id.txt_settings)
+    void onClickSettings() {
+        startActivity(new Intent(this, SettingsActivity.class));
+    }
+
     private ActionBarDrawerToggle mActionBarToggle;
 
     @Override

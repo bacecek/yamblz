@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Погода</string>
+
+    <string name="drawer_open">Открыть боковое меню</string>
+    <string name="drawer_close">Закрыть боковое меню</string>
+
+    <!--Actions-->
+    <string name="action_settings">Настройки</string>
+    <string name="action_about">О приложении</string>
+</resources>

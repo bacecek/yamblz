@@ -32,4 +32,9 @@ dependencies {
 
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support.constraint:constraint-layout:$constraint_version"
+    implementation "com.android.support:design:$support_version"
+
+    //butterknife
+    implementation "com.jakewharton:butterknife:$butterknife_version"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Погода</string>
+
+    <string name="drawer_open">Открыть боковое меню</string>
+    <string name="drawer_close">Закрыть боковое меню</string>
+
+    <!--Actions-->
+    <string name="action_settings">Настройки</string>
+    <string name="action_about_app">О приложении</string>
+
+    <!--Errors-->
+    <string name="error_no_email_app">На устройстве отсутствует приложение почты. Почта скопирована в буфер обмена.</string>
+
+    <!--About-->
+    <string name="version">Версия</string>
+    <string name="about_app">Домашняя работа на проекте \"Мобилизация\", организованная Яндексом</string>
+    <string name="about_contact_me">Обратная связь</string>
+    <string name="about_source_code_title">Исходный код на GitHub</string>
+    <string name="about_contact_via">Написать с помощью…</string>
+</resources>

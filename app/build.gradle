@@ -10,19 +10,18 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "API_WEATHER_KEY",
+                "\"a5628ee4c36c6009a88a491a2a2cfdbf\""
+        buildConfigField "String", "API_WEATHER_URL",
+                "\"http://api.openweathermap.org/data/2.5/\""
+
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    signingConfigs {
-        release {
-            keyAlias System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
-            keyPassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
-            storeFile file(System.getenv("HOME") + "/keystores/yamblz.jks")
-            storePassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
         }
     }
     compileOptions {
@@ -47,4 +46,25 @@ dependencies {
     //butterknife
     implementation "com.jakewharton:butterknife:$butterknife_version"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
+
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_version"
+
+    //jobdispatcher
+    implementation "com.firebase:firebase-jobdispatcher:$jobdispatcher_version"
+
+    //rx
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    //rxprefs
+
+    //dagger
+    compile "com.google.dagger:dagger:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+
+    //other
+    implementation "com.jakewharton.timber:timber:$timber_version"
 }

@@ -1,0 +1,46 @@
+package com.bacecek.yamblz.data.network.response;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
+/**
+ * Created by Denis Buzmakov on 12.07.2017.
+ * <buzmakov.da@gmail.com>
+ */
+
+public class WeatherResponse {
+
+    @SerializedName("weather")
+    private List<ConditionResponse> conditions;
+
+    @SerializedName("main")
+    private WeatherInfoResponse info;
+
+    @SerializedName("clouds")
+    private CloudsResponse cloudsInfo;
+
+    private int visibility;
+
+    private WindResponse wind;
+
+    public List<ConditionResponse> getConditions() {
+        return conditions;
+    }
+
+    public WeatherInfoResponse getInfo() {
+        return info;
+    }
+
+    public int getVisibility() {
+        return visibility;
+    }
+
+    public WindResponse getWindInfo() {
+        return wind;
+    }
+
+    public CloudsResponse getCloudsInfo() {
+        return cloudsInfo;
+    }
+}

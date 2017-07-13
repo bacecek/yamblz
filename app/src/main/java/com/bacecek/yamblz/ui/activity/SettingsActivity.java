@@ -1,6 +1,5 @@
-package com.bacecek.yamblz.ui;
+package com.bacecek.yamblz.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
@@ -11,7 +10,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;

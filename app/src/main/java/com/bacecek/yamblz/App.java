@@ -7,7 +7,8 @@ import com.bacecek.yamblz.di.component.DaggerAppComponent;
 import com.bacecek.yamblz.di.module.AppModule;
 import com.bacecek.yamblz.di.module.NetworkModule;
 import com.bacecek.yamblz.data.network.service.WeatherJobService;
-import com.bacecek.yamblz.utils.Consts;
+import com.bacecek.yamblz.util.Consts;
+import com.facebook.stetho.Stetho;
 import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -29,16 +30,20 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        if(BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
-        }
-
         initDI(); //должно всегда быть первым, т.к. после него идет иницизация и запуск сервиса, в котором нужен DI
+        initLibraries();
         startWeatherService();
     }
 
     public static AppComponent getAppComponent() {
         return sAppComponent;
+    }
+
+    private void initLibraries() {
+        if(BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+            Stetho.initializeWithDefaults(getApplicationContext());
+        }
     }
 
     /**

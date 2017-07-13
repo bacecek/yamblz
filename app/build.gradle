@@ -59,11 +59,20 @@ dependencies {
     //rx
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
-    //rxprefs
+    implementation "com.f2prateek.rx.preferences2:rx-preferences:$rxprefs_version"
 
     //dagger
-    compile "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+
+    //architecture components
+    implementation "android.arch.lifecycle:runtime:$arch_components_version"
+    implementation "android.arch.lifecycle:extensions:$arch_components_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$arch_components_version"
+
+    //stetho
+    implementation "com.facebook.stetho:stetho:$stetho_version"
+    implementation "com.facebook.stetho:stetho-okhttp3:$stetho_version"
 
     //other
     implementation "com.jakewharton.timber:timber:$timber_version"

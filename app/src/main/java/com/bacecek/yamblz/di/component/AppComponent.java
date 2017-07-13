@@ -3,6 +3,8 @@ package com.bacecek.yamblz.di.component;
 import com.bacecek.yamblz.di.module.AppModule;
 import com.bacecek.yamblz.di.module.NetworkModule;
 import com.bacecek.yamblz.data.network.service.WeatherJobService;
+import com.bacecek.yamblz.viewmodel.MainViewModel;
+import com.bacecek.yamblz.viewmodel.SettingsViewModel;
 
 import javax.inject.Singleton;
 
@@ -18,4 +20,6 @@ import dagger.Component;
 public interface AppComponent {
 
     void inject(WeatherJobService service);
+    void inject(MainViewModel viewModel);
+    void inject(SettingsViewModel viewModel);
 }

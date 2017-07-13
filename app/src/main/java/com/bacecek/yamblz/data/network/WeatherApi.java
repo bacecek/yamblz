@@ -13,5 +13,5 @@ import retrofit2.http.Query;
 
 public interface WeatherApi {
     @GET("weather")
-    Single<WeatherResponse> getCurrentWeather(@Query("q") String city);
+    Single<WeatherResponse> getCurrentWeather(@Query("q") String city, @Query("units") String units);
 }

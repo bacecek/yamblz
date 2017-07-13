@@ -1,14 +1,13 @@
 package com.bacecek.yamblz.data.network.service;
 
 import com.bacecek.yamblz.App;
-import com.bacecek.yamblz.data.network.WeatherApi;
+import com.bacecek.yamblz.data.repository.weather.WeatherRepository;
 import com.firebase.jobdispatcher.JobParameters;
 import com.firebase.jobdispatcher.JobService;
 
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -23,16 +22,15 @@ public class WeatherJobService extends JobService {
     }
 
     @Inject
-    WeatherApi mApi;
+    WeatherRepository mRepository;
 
     @Override
     public boolean onStartJob(JobParameters job) {
         Timber.d("weather job started");
-        mApi.getCurrentWeather("moscow")
-                .subscribeOn(Schedulers.io())
+        mRepository.getCurrentWeather("moscow")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    Timber.d(String.valueOf(response.getInfo().getCurrentTemperature()));
+                    mRepository.saveLastWeather(response);
                     jobFinished(job, false);
                 }, error -> {
                     Timber.d(error.getMessage());

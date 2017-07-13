@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bacecek.yamblz.ui.SettingsActivity"
+    tools:context="com.bacecek.yamblz.ui.activity.SettingsActivity"
     android:fitsSystemWindows="true">
 
     <include layout="@layout/layout_toolbar"/>

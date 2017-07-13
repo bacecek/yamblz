@@ -1,8 +1,15 @@
 package com.bacecek.yamblz.di.module;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.bacecek.yamblz.BuildConfig;
 import com.bacecek.yamblz.data.network.util.KeyInterceptor;
 import com.bacecek.yamblz.data.network.WeatherApi;
+import com.bacecek.yamblz.data.repository.weather.WeatherRepository;
+import com.bacecek.yamblz.data.repository.weather.WeatherRepositoryImpl;
+import com.f2prateek.rx.preferences2.RxSharedPreferences;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import javax.inject.Singleton;
 
@@ -34,6 +41,7 @@ public class NetworkModule {
     OkHttpClient provideOkHttpClient(Interceptor interceptor) {
         return new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
+                .addInterceptor(new StethoInterceptor())
                 .build();
     }
 
@@ -58,6 +66,12 @@ public class NetworkModule {
     @Singleton
     WeatherApi provideWeatherApi(Retrofit retrofit) {
         return retrofit.create(WeatherApi.class);
+    }
+
+    @Provides
+    @Singleton
+    WeatherRepository provideWeatherRepository(Context context, WeatherApi api, RxSharedPreferences rxPreferences, SharedPreferences preferences) {
+        return new WeatherRepositoryImpl(context, api, rxPreferences, preferences);
     }
 
 }

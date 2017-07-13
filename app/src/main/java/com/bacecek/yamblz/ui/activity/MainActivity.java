@@ -1,23 +1,24 @@
-package com.bacecek.yamblz.ui;
+package com.bacecek.yamblz.ui.activity;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.bacecek.yamblz.R;
+import com.bacecek.yamblz.viewmodel.MainViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private ActionBarDrawerToggle mActionBarToggle;
+    private MainViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         initToolbar();
+
+        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
     }
 
     /**

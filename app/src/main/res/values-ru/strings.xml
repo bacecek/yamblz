@@ -4,6 +4,8 @@
 
     <string name="drawer_open">Открыть боковое меню</string>
     <string name="drawer_close">Закрыть боковое меню</string>
+    <string name="cancel">Отмена</string>
+    <string name="ok">ОК</string>
 
     <!--Actions-->
     <string name="action_settings">Настройки</string>
@@ -20,12 +22,17 @@
     <string name="about_contact_via">Написать с помощью…</string>
 
     <!--Settings-->
-    <string name="settings_units_title">Temperature</string>
+    <string name="settings_units_title">Температура</string>
     <string name="settings_period_title">Период обновления информации о погоде</string>
 
-    <!--Time units-->
-    <string name="time_unit_minute">мин</string>
-    <string name="time_unit_hour">ч</string>
-    <string name="time_unit_day">д</string>
-    <string name="time_unit_week">нед</string>
+    <!--Time intervals-->
+    <string-array name="array_intervals_titles">
+        <item>5 мин</item>
+        <item>10 мин</item>
+        <item>30 мин</item>
+        <item>1 час</item>
+        <item>12 часов</item>
+        <item>1 день</item>
+        <item>1 неделя</item>
+    </string-array>
 </resources>

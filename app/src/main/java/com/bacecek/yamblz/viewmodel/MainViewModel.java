@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.bacecek.yamblz.App;
 import com.bacecek.yamblz.data.network.response.WeatherResponse;
+import com.bacecek.yamblz.data.repository.settings.SettingsManager;
 import com.bacecek.yamblz.data.repository.weather.WeatherRepository;
 
 import javax.inject.Inject;
@@ -23,10 +24,13 @@ public class MainViewModel extends ViewModel {
     }
 
     @Inject
-    WeatherRepository mRepository;
+    WeatherRepository mWeatherRepository;
+
+    @Inject
+    SettingsManager mSettingsManager;
 
     public Single<WeatherResponse> getCurrentWeather(String city) {
-        return mRepository.getCurrentWeather(city)
+        return mWeatherRepository.getCurrentWeather(city)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 

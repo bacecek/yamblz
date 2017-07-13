@@ -3,6 +3,8 @@
 
     <string name="drawer_open">Open navigation view</string>
     <string name="drawer_close">Close navigation view</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
 
     <!--Actions-->
     <string name="action_settings">Settings</string>
@@ -21,14 +23,33 @@
     <string name="about_contact_via">Contact via…</string>
 
     <!--Settings-->
-    <string name="settings_units_title">Температура</string>
+    <string name="settings_units_title">Temperature</string>
     <string name="settings_units_celsius" translatable="false">&#176;C</string>
     <string name="settings_units_fahrenheit" translatable="false">&#176;F</string>
     <string name="settings_period_title">Update the weather every</string>
 
-    <!--Time units-->
-    <string name="time_unit_minute">m</string>
-    <string name="time_unit_hour">h</string>
-    <string name="time_unit_day">d</string>
-    <string name="time_unit_week">w</string>
+    <!--Time intervals-->
+    <string-array name="array_intervals_titles">
+        <item>5 min</item>
+        <item>10 min</item>
+        <item>30 min</item>
+        <item>1 hour</item>
+        <item>12 hours</item>
+        <item>1 day</item>
+        <item>1 week</item>
+    </string-array>
+    <!--При добавлении в интервала необходимо также добавить значение в секундах согласно позиции-->
+    <integer-array name="array_intervals_values">
+        <item>300</item>
+        <item>600</item>
+        <item>1800</item>
+        <item>3600</item>
+        <item>43200</item>
+        <item>86400</item>
+        <item>604800</item>
+    </integer-array>
+
+    <!--Temperature units-->
+    <string name="metric" translatable="false">metric</string>
+    <string name="imperial" translatable="false">imperial</string>
 </resources>

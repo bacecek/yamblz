@@ -61,17 +61,21 @@ public class App extends Application {
      */
     private void startWeatherService() {
         //TODO:проверка включения сервиса в настройках
-        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(getApplicationContext()));
-        dispatcher.cancelAll(); //отменить все существующие, чтобы они не работали параллельно и не создавали кашу
-        Job job = dispatcher.newJobBuilder()
-                .setService(WeatherJobService.class)
-                .setTag(Consts.TAG_WEATHER_SERVICE)
-                .setLifetime(Lifetime.FOREVER)
-                .setConstraints(Constraint.ON_ANY_NETWORK)
-                .setRecurring(true)
-                .setReplaceCurrent(true)
-                .setTrigger(Trigger.executionWindow(30, 60))//TODO: доставать значения из настроек
-                .build();
-        dispatcher.mustSchedule(job);
+        sAppComponent.getSettings().getUpdateIntervalObservable()
+                .subscribe(interval -> {
+                    Timber.d("Update interval: " + String.valueOf(interval));
+                    FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(getApplicationContext()));
+                    dispatcher.cancelAll(); //отменить все существующие, чтобы они не работали параллельно и не создавали кашу
+                    Job job = dispatcher.newJobBuilder()
+                            .setService(WeatherJobService.class)
+                            .setTag(Consts.TAG_WEATHER_SERVICE)
+                            .setLifetime(Lifetime.FOREVER)
+                            .setConstraints(Constraint.ON_ANY_NETWORK)
+                            .setRecurring(true)
+                            .setReplaceCurrent(true)
+                            .setTrigger(Trigger.executionWindow((int) (interval / 1.5), (int) (interval * 1.5)))
+                            .build();
+                    dispatcher.mustSchedule(job);
+                });
     }
 }

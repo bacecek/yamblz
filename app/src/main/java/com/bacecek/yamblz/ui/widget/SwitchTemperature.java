@@ -71,6 +71,11 @@ public class SwitchTemperature extends FrameLayout {
         updateViewStates();
     }
 
+    @State
+    public int getState() {
+        return mState;
+    }
+
     private void updateViewStates() {
         mTxtCelsius.setSelected(mState == State.CELSIUS);
         mTxtFahrenheit.setSelected(mState == State.FAHRENHEIT);

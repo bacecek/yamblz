@@ -19,4 +19,16 @@
     <string name="about_email" translatable="false">buzmakov.da@gmail.com</string>
     <string name="about_source_code" translatable="false">https://github.com/bacecek/yamblz</string>
     <string name="about_contact_via">Contact via…</string>
+
+    <!--Settings-->
+    <string name="settings_units_title">Температура</string>
+    <string name="settings_units_celsius" translatable="false">&#176;C</string>
+    <string name="settings_units_fahrenheit" translatable="false">&#176;F</string>
+    <string name="settings_period_title">Update the weather every</string>
+
+    <!--Time units-->
+    <string name="time_unit_minute">m</string>
+    <string name="time_unit_hour">h</string>
+    <string name="time_unit_day">d</string>
+    <string name="time_unit_week">w</string>
 </resources>

@@ -3,4 +3,6 @@
     <color name="colorPrimary">@android:color/white</color>
     <color name="colorPrimaryDark">@android:color/white</color>
     <color name="colorAccent">@android:color/black</color>
+    <color name="colorDivider">#DEDEDE</color>
+    <color name="colorSettingsSubtitleText">#A0A0A0</color>
 </resources>

@@ -18,4 +18,14 @@
     <string name="about_contact_me">Обратная связь</string>
     <string name="about_source_code_title">Исходный код на GitHub</string>
     <string name="about_contact_via">Написать с помощью…</string>
+
+    <!--Settings-->
+    <string name="settings_units_title">Temperature</string>
+    <string name="settings_period_title">Период обновления информации о погоде</string>
+
+    <!--Time units-->
+    <string name="time_unit_minute">мин</string>
+    <string name="time_unit_hour">ч</string>
+    <string name="time_unit_day">д</string>
+    <string name="time_unit_week">нед</string>
 </resources>

@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Created by Denis Buzmakov on 13.07.2017.
@@ -39,9 +40,11 @@ public class WeatherRepositoryImpl implements WeatherRepository {
     @Override
     public Single<WeatherResponse> getCurrentWeather(String city) {
         if(Utils.isOnline(mContext)) {
+            Timber.d("get weather from api");
             return mApi.getCurrentWeather(city, mPreferences.getString(Consts.Prefs.KEY_UNITS, mResources.getString(R.string.metric)))
                     .subscribeOn(Schedulers.io());
         } else {
+            Timber.d("get weather from local storage");
             return Single.fromObservable(mRxPreferences.getString(Consts.Prefs.KEY_LAST_WEATHER, "")
                     .asObservable())
                     .map(s -> new Gson().fromJson(s, WeatherResponse.class));

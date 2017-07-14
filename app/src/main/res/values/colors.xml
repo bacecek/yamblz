@@ -5,4 +5,5 @@
     <color name="colorAccent">@android:color/black</color>
     <color name="colorDivider">#DEDEDE</color>
     <color name="colorSettingsSubtitleText">#A0A0A0</color>
+    <color name="colorWeatherDescriptionTitle">#9C9C9C</color>
 </resources>

@@ -1,6 +1,5 @@
 package com.bacecek.yamblz.ui.activity;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.Nullable;
@@ -12,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.bacecek.yamblz.R;
-import com.bacecek.yamblz.viewmodel.MainViewModel;
+import com.bacecek.yamblz.ui.fragment.WeatherFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,7 +35,6 @@ public class MainActivity extends BaseActivity {
     }
 
     private ActionBarDrawerToggle mActionBarToggle;
-    private MainViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +44,11 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         initToolbar();
 
-        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        if(savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, WeatherFragment.newInstance())
+                    .commit();
+        }
     }
 
     /**

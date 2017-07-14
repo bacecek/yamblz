@@ -39,4 +39,14 @@
         <item name="android:textColor">@color/colorSettingsSubtitleText</item>
     </style>
 
+    <style name="WeatherAdditionalInfoTitle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorWeatherDescriptionTitle</item>
+    </style>
+
+    <style name="WeatherAdditionalInfoValue">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
 </resources>

@@ -3,7 +3,7 @@ package com.bacecek.yamblz.viewmodel;
 import android.arch.lifecycle.ViewModel;
 
 import com.bacecek.yamblz.App;
-import com.bacecek.yamblz.data.network.response.WeatherResponse;
+import com.bacecek.yamblz.data.presentation.WeatherInfo;
 import com.bacecek.yamblz.data.repository.settings.SettingsManager;
 import com.bacecek.yamblz.data.repository.weather.WeatherRepository;
 
@@ -17,9 +17,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  * <buzmakov.da@gmail.com>
  */
 
-public class MainViewModel extends ViewModel {
+public class WeatherViewModel extends ViewModel {
 
-    public MainViewModel() {
+    public WeatherViewModel() {
         App.getAppComponent().inject(this);
     }
 
@@ -29,9 +29,15 @@ public class MainViewModel extends ViewModel {
     @Inject
     SettingsManager mSettingsManager;
 
-    public Single<WeatherResponse> getCurrentWeather(String city) {
+    public Single<WeatherInfo> getCurrentWeather(String city) {
         return mWeatherRepository.getCurrentWeather(city)
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(result -> new WeatherInfo(
+                        result.getInfo().getCurrentTemperature(),
+                        result.getConditions().get(0).getConditionId(),
+                        result.getInfo().getHumidity(),
+                        result.getWindInfo().getSpeed(),
+                        result.getInternalInfo().getSunrise()));
     }
 
 }

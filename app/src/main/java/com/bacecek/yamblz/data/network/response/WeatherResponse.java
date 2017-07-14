@@ -20,6 +20,9 @@ public class WeatherResponse {
     @SerializedName("clouds")
     private CloudsResponse cloudsInfo;
 
+    @SerializedName("sys")
+    private InternalInfoResponse internalInfo;
+
     private int visibility;
 
     private WindResponse wind;
@@ -42,5 +45,9 @@ public class WeatherResponse {
 
     public CloudsResponse getCloudsInfo() {
         return cloudsInfo;
+    }
+
+    public InternalInfoResponse getInternalInfo() {
+        return internalInfo;
     }
 }

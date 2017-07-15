@@ -24,17 +24,17 @@ public class WeatherJobService extends JobService {
     }
 
     @Inject
-    WeatherRepository mWeatherRepository;
+    WeatherRepository weatherRepository;
     @Inject
-    SettingsManager mSettingsManager;
+    SettingsManager settingsManager;
 
     @Override
     public boolean onStartJob(JobParameters job) {
         Timber.d("weather job started");
-        mWeatherRepository.getCurrentWeather(getString(R.string.moscow_request))
+        weatherRepository.getCurrentWeather(getString(R.string.moscow_request))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    mWeatherRepository.saveLastWeather(response);
+                    weatherRepository.saveLastWeather(response);
                     jobFinished(job, false);
                 }, error -> {
                     Timber.d(error.getMessage());

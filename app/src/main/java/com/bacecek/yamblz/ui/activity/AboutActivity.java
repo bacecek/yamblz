@@ -21,9 +21,9 @@ import butterknife.OnClick;
 public class AboutActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    Toolbar toolbar;
     @BindView(R.id.txt_version)
-    TextView mTxtVersion;
+    TextView txtVersion;
 
     @OnClick(R.id.txt_source_code)
     void onClickSourceCode() {
@@ -60,15 +60,15 @@ public class AboutActivity extends BaseActivity {
     }
 
     private void initToolbar() {
-        setSupportActionBar(mToolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        mToolbar.setNavigationOnClickListener(view -> onBackPressed());
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
     }
 
     private void initUI() {
         String version = BuildConfig.VERSION_NAME;
-        mTxtVersion.setText(version);
+        txtVersion.setText(version);
     }
 
     private void goToSite(String url) {

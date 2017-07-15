@@ -52,9 +52,7 @@ public class WeatherFragment extends LifecycleFragment implements WeatherPresent
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_weather, container, false);
         ButterKnife.bind(this, layout);
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            presenter.onRefresh();
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> presenter.onRefresh());
         return layout;
     }
 
@@ -63,7 +61,6 @@ public class WeatherFragment extends LifecycleFragment implements WeatherPresent
         super.onViewCreated(view, savedInstanceState);
         presenter = ViewModelProviders.of(this).get(WeatherPresenter.class);
         presenter.onAttach(this);
-        presenter.getCurrentWeather();
     }
 
     @Override

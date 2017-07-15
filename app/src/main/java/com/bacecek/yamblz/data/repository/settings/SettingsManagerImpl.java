@@ -15,50 +15,49 @@ import io.reactivex.Observable;
  */
 
 public class SettingsManagerImpl implements SettingsManager {
-
-    private SharedPreferences mPreferences;
-    private RxSharedPreferences mRxPreferences;
-    private AppResources mResources;
+    private SharedPreferences preferences;
+    private RxSharedPreferences rxPreferences;
+    private AppResources resources;
 
     public SettingsManagerImpl(SharedPreferences preferences, RxSharedPreferences rxPreferences, AppResources resources) {
-        mPreferences = preferences;
-        mRxPreferences = rxPreferences;
-        mResources = resources;
+        this.preferences = preferences;
+        this.rxPreferences = rxPreferences;
+        this.resources = resources;
     }
 
     @Override
     public String getTemperatureUnits() {
-        return mPreferences.getString(Consts.Prefs.KEY_UNITS, mResources.getString(R.string.metric));
+        return preferences.getString(Consts.Prefs.KEY_UNITS, resources.getString(R.string.metric));
     }
 
     @Override
     public void saveTemperatureUnits(String units) {
-        mPreferences.edit()
+        preferences.edit()
                 .putString(Consts.Prefs.KEY_UNITS, units)
                 .apply();
     }
 
     @Override
     public Observable<String> getTemperatureUnitsObservable() {
-        return mRxPreferences.getString(Consts.Prefs.KEY_UNITS, mResources.getString(R.string.metric))
+        return rxPreferences.getString(Consts.Prefs.KEY_UNITS, resources.getString(R.string.metric))
                 .asObservable();
     }
 
     @Override
     public int getUpdateInterval() {
-        return mPreferences.getInt(Consts.Prefs.KEY_UPDATE_INTERVAL, Consts.DEFAULT_UPDATE_INTERVAL);
+        return preferences.getInt(Consts.Prefs.KEY_UPDATE_INTERVAL, Consts.DEFAULT_UPDATE_INTERVAL);
     }
 
     @Override
     public void saveUpdateInterval(int interval) {
-        mPreferences.edit()
+        preferences.edit()
                 .putInt(Consts.Prefs.KEY_UPDATE_INTERVAL, interval)
                 .apply();
     }
 
     @Override
     public Observable<Integer> getUpdateIntervalObservable() {
-        return mRxPreferences.getInteger(Consts.Prefs.KEY_UPDATE_INTERVAL, Consts.DEFAULT_UPDATE_INTERVAL)
+        return rxPreferences.getInteger(Consts.Prefs.KEY_UPDATE_INTERVAL, Consts.DEFAULT_UPDATE_INTERVAL)
                 .asObservable();
     }
 }

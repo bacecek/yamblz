@@ -10,18 +10,18 @@ import android.support.annotation.StringRes;
 
 public class AppResources {
 
-    private Context mContext;
+    private Context context;
 
     public AppResources(Context context) {
-        mContext = context.getApplicationContext();
+        this.context = context.getApplicationContext();
     }
 
     public String getString(@StringRes int res) {
-        return mContext.getString(res);
+        return context.getString(res);
     }
 
     public String getString(@StringRes int res, Object... formatArgs) {
-        return mContext.getString(res, formatArgs);
+        return context.getString(res, formatArgs);
     }
 
 }

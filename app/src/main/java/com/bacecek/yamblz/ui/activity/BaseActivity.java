@@ -10,10 +10,10 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public class BaseActivity extends AppCompatActivity implements LifecycleOwner {
-    private final LifecycleRegistry mRegistry = new LifecycleRegistry(this);
+    private final LifecycleRegistry registry = new LifecycleRegistry(this);
 
     @Override
     public LifecycleRegistry getLifecycle() {
-        return mRegistry;
+        return registry;
     }
 }

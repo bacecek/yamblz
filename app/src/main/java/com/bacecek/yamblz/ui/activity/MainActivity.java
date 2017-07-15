@@ -20,9 +20,9 @@ import butterknife.OnClick;
 public class MainActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    Toolbar toolbar;
     @BindView(R.id.layout_drawer)
-    DrawerLayout mDrawerLayout;
+    DrawerLayout drawerLayout;
 
     @OnClick(R.id.txt_about)
     void onClickAbout() {
@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity {
         startActivity(new Intent(this, SettingsActivity.class));
     }
 
-    private ActionBarDrawerToggle mActionBarToggle;
+    private ActionBarDrawerToggle actionBarToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,27 +52,24 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-     * Инициализация тулбара
+     * toolbar initialization
      */
     private void initToolbar() {
-        setSupportActionBar(mToolbar);
+        setSupportActionBar(toolbar);
         setTitle(null);
-        mActionBarToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
-        mDrawerLayout.addDrawerListener(mActionBarToggle);
+        actionBarToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
+        drawerLayout.addDrawerListener(actionBarToggle);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mActionBarToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return actionBarToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
-        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -81,12 +78,12 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mActionBarToggle.syncState();
+        actionBarToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mActionBarToggle.onConfigurationChanged(newConfig);
+        actionBarToggle.onConfigurationChanged(newConfig);
     }
 }

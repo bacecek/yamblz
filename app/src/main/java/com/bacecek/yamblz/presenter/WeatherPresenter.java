@@ -66,18 +66,18 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
     @Override
     public void onAttach(WeatherView view) {
         super.onAttach(view);
+        getCurrentWeather();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        WeatherView view = getView();
-        if(view != null) {
-            view.hideLoading();
+        if(getView() != null) {
+            getView().hideLoading();
         }
     }
 
-    public void getCurrentWeather() {
+    private void getCurrentWeather() {
         //if weather info exists, show it on view. otherwise, load from repository
         if(currentWeatherInfo != null) {
             if(getView() != null) {
@@ -138,7 +138,6 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
             result = resources.getString(R.string.template_temperature_celsius, resultTemperature);
         } else if(units.equals(resources.getString(R.string.imperial))) {
             double resultTemperature = temperature * 9 / 5 - 459.67;
-            resultTemperature = Math.round(resultTemperature * 100) / 100; //round temperature to 2 digits after dot
             result = resources.getString(R.string.template_temperature_fahrenheit, resultTemperature);
         }
         return result;

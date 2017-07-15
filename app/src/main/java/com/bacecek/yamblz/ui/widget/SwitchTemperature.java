@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -33,12 +32,12 @@ public class SwitchTemperature extends FrameLayout {
     }
 
     @State
-    private int mState;
+    private int state;
 
     @BindView(R.id.txt_celsius)
-    TextView mTxtCelsius;
+    TextView txtCelsius;
     @BindView(R.id.txt_fahrenheit)
-    TextView mTxtFahrenheit;
+    TextView txtFahrenheit;
 
     public SwitchTemperature(@NonNull Context context) {
         super(context);
@@ -62,22 +61,22 @@ public class SwitchTemperature extends FrameLayout {
     }
 
     public void setState(@State int state) {
-        mState = state;
+        this.state = state;
         updateViewStates();
     }
 
     public void switchState() {
-        mState = mState == State.CELSIUS ? State.FAHRENHEIT : State.CELSIUS;
+        state = state == State.CELSIUS ? State.FAHRENHEIT : State.CELSIUS;
         updateViewStates();
     }
 
     @State
     public int getState() {
-        return mState;
+        return state;
     }
 
     private void updateViewStates() {
-        mTxtCelsius.setSelected(mState == State.CELSIUS);
-        mTxtFahrenheit.setSelected(mState == State.FAHRENHEIT);
+        txtCelsius.setSelected(state == State.CELSIUS);
+        txtFahrenheit.setSelected(state == State.FAHRENHEIT);
     }
 }

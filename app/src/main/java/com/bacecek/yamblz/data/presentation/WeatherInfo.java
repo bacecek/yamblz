@@ -1,30 +1,33 @@
 package com.bacecek.yamblz.data.presentation;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * Created by Denis Buzmakov on 14.07.2017.
  * <buzmakov.da@gmail.com>
  */
 
-public class WeatherInfo implements Parcelable {
-    private double currentTemperature;
+public class WeatherInfo {
+    private String currentTemperature;
     private int conditionId;
     private int humidity;
     private double windSpeed;
-    private long sunriseTime;
+    private String sunriseTime;
+    private String updateTime;
 
-    public WeatherInfo(double currentTemperature, int conditionId, int humidity, double windSpeed, long sunriseTime) {
+    public WeatherInfo(String currentTemperature, int conditionId, int humidity, double windSpeed, String sunriseTime, String updateTime) {
         this.currentTemperature = currentTemperature;
         this.conditionId = conditionId;
         this.humidity = humidity;
         this.windSpeed = windSpeed;
         this.sunriseTime = sunriseTime;
+        this.updateTime = updateTime;
     }
 
-    public double getCurrentTemperature() {
+    public String getCurrentTemperature() {
         return currentTemperature;
+    }
+
+    public void setCurrentTemperature(String currentTemperature) {
+        this.currentTemperature = currentTemperature;
     }
 
     public int getConditionId() {
@@ -39,41 +42,11 @@ public class WeatherInfo implements Parcelable {
         return windSpeed;
     }
 
-    public long getSunriseTime() {
+    public String getSunriseTime() {
         return sunriseTime;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getUpdateTime() {
+        return updateTime;
     }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeDouble(this.currentTemperature);
-        dest.writeInt(this.conditionId);
-        dest.writeInt(this.humidity);
-        dest.writeDouble(this.windSpeed);
-        dest.writeLong(this.sunriseTime);
-    }
-
-    protected WeatherInfo(Parcel in) {
-        this.currentTemperature = in.readDouble();
-        this.conditionId = in.readInt();
-        this.humidity = in.readInt();
-        this.windSpeed = in.readDouble();
-        this.sunriseTime = in.readLong();
-    }
-
-    public static final Creator<WeatherInfo> CREATOR = new Creator<WeatherInfo>() {
-        @Override
-        public WeatherInfo createFromParcel(Parcel source) {
-            return new WeatherInfo(source);
-        }
-
-        @Override
-        public WeatherInfo[] newArray(int size) {
-            return new WeatherInfo[size];
-        }
-    };
 }

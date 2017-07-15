@@ -11,6 +11,12 @@
     <string name="humidity">Влажность</string>
     <string name="moscow">Москва</string>
 
+    <!--Templates for showing weather information-->
+    <string name="template_temperature_celsius">%1$.1f &#176;C</string>
+    <string name="template_temperature_fahrenheit">%1$.1f &#176;F</string>
+    <string name="template_wind_speed">%1$.1f м/с</string>
+    <string name="template_humidity">%1$d%%</string>
+
     <!--Actions-->
     <string name="action_settings">Настройки</string>
     <string name="action_about_app">О приложении</string>

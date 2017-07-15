@@ -11,6 +11,12 @@
     <string name="moscow">Moscow</string>
     <string name="moscow_request" translatable="false">moscow</string>
 
+    <!--Templates for showing weather information-->
+    <string name="template_temperature_celsius">%1$.1f &#176;C</string>
+    <string name="template_temperature_fahrenheit">%1$.1f &#176;F</string>
+    <string name="template_wind_speed">%1$.1f m/s</string>
+    <string name="template_humidity">%1$d%%</string>
+
     <!--Actions-->
     <string name="action_settings">Settings</string>
     <string name="action_about_app">About app</string>

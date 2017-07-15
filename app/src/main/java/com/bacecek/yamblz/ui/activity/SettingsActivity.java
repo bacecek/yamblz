@@ -7,8 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.bacecek.yamblz.R;
+import com.bacecek.yamblz.presenter.SettingsPresenter;
 import com.bacecek.yamblz.ui.widget.SwitchTemperature;
-import com.bacecek.yamblz.viewmodel.SettingsViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +40,7 @@ public class SettingsActivity extends BaseActivity {
         mDialogUpdateInterval.show();
     }
 
-    private SettingsViewModel mViewModel;
+    private SettingsPresenter mViewModel;
     private AlertDialog.Builder mDialogUpdateInterval;
 
     @Override
@@ -49,7 +49,7 @@ public class SettingsActivity extends BaseActivity {
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
         setTitle(R.string.action_settings);
-        mViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(SettingsPresenter.class);
 
         initToolbar();
         initUI();

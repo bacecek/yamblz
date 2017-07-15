@@ -1,4 +1,4 @@
-package com.bacecek.yamblz.viewmodel;
+package com.bacecek.yamblz.presenter;
 
 import android.arch.lifecycle.ViewModel;
 
@@ -14,9 +14,9 @@ import io.reactivex.Observable;
  * <buzmakov.da@gmail.com>
  */
 
-public class SettingsViewModel extends ViewModel {
+public class SettingsPresenter extends ViewModel {
 
-    public SettingsViewModel() {
+    public SettingsPresenter() {
         App.getAppComponent().inject(this);
     }
 

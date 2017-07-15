@@ -20,4 +20,8 @@ public class AppResources {
         return mContext.getString(res);
     }
 
+    public String getString(@StringRes int res, Object... formatArgs) {
+        return mContext.getString(res, formatArgs);
+    }
+
 }

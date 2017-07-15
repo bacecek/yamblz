@@ -42,7 +42,7 @@ public class NetworkModule {
     OkHttpClient provideOkHttpClient(Interceptor interceptor) {
         return new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                .addInterceptor(new StethoInterceptor())
+                .addNetworkInterceptor(new StethoInterceptor())
                 .build();
     }
 

@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 
 import com.bacecek.yamblz.R;
 import com.bacecek.yamblz.data.presentation.WeatherInfo;
-import com.bacecek.yamblz.viewmodel.WeatherViewModel;
+import com.bacecek.yamblz.presenter.WeatherPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,15 +24,14 @@ import butterknife.ButterKnife;
  * <buzmakov.da@gmail.com>
  */
 
-public class WeatherFragment extends LifecycleFragment {
+public class WeatherFragment extends LifecycleFragment implements WeatherPresenter.WeatherView {
     private static final String KEY_WEATHER = "current_weather";
-    private WeatherViewModel viewModel;
-    private WeatherInfo currentWeatherInfo;
+    private WeatherPresenter presenter;
 
     @BindView(R.id.txt_city)
     TextView txtCity;
-    @BindView(R.id.txt_update_date)
-    TextView txtUpdateDate;
+    @BindView(R.id.txt_update_time)
+    TextView txtUpdateTime;
     @BindView(R.id.txt_temperature)
     TextView txtTemperature;
     @BindView(R.id.txt_description)
@@ -44,50 +44,69 @@ public class WeatherFragment extends LifecycleFragment {
     TextView txtHumidity;
     @BindView(R.id.img_weather_condition)
     ImageView imgWeatherCondition;
+    @BindView(R.id.layout_swipe)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_weather, container, false);
         ButterKnife.bind(this, layout);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            presenter.onRefresh();
+        });
         return layout;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = ViewModelProviders.of(this).get(WeatherViewModel.class);
-
-        if(savedInstanceState != null) {
-            currentWeatherInfo = savedInstanceState.getParcelable(KEY_WEATHER);
-        }
-        if(currentWeatherInfo == null) {
-            viewModel.getCurrentWeather(getString(R.string.moscow_request))
-                    .subscribe(result -> {
-                        currentWeatherInfo = result;
-                        showWeather(result);
-                    });
-        } else {
-            showWeather(currentWeatherInfo);
-        }
+        presenter = ViewModelProviders.of(this).get(WeatherPresenter.class);
+        presenter.onAttach(this);
+        presenter.getCurrentWeather();
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putParcelable(KEY_WEATHER, currentWeatherInfo);
+    public void onDestroyView() {
+        super.onDestroyView();
+        presenter.onDetach();
     }
 
-    public void showWeather(@NonNull WeatherInfo weatherInfo) {
+    @Override
+    public void showWeatherInfo(@NonNull WeatherInfo weatherInfo) {
         txtCity.setText(getString(R.string.moscow));//TODO:change city from response in the future
-        txtUpdateDate.setText("");//TODO:сделать получение даты обновления погоды
-        txtTemperature.setText(String.valueOf(weatherInfo.getCurrentTemperature()));//TODO: вынести в ресурсы отображение погоды
+        txtUpdateTime.setText(weatherInfo.getUpdateTime());
+        txtTemperature.setText(weatherInfo.getCurrentTemperature());
         txtDescription.setText("");//TODO:сделать дескрипшн на русском (на устройстве, а не с сервера)
-        txtSunriseDate.setText(String.valueOf(weatherInfo.getSunriseTime()));//TODO:сделать нормально отображение времени, преобразование мб в VM
-        txtWindSpeed.setText(String.valueOf(weatherInfo.getWindSpeed()));//TODO:сделать форматирование с 1 цифрой после запятой
-        txtHumidity.setText(String.valueOf(weatherInfo.getHumidity()));//TODO:допилить отображение влажности
+        txtSunriseDate.setText(weatherInfo.getSunriseTime());
+        txtWindSpeed.setText(getString(R.string.template_wind_speed, weatherInfo.getWindSpeed()));
+        txtHumidity.setText(getString(R.string.template_humidity, weatherInfo.getHumidity()));
         //TODO:в зависимости от состояния погоды задавать картинку
+    }
+
+    @Override
+    public void hideWeatherInfo() {
+
+    }
+
+    @Override
+    public void showLoading() {
+        swipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public void hideLoading() {
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showEmptyView() {
+
+    }
+
+    @Override
+    public void hideEmptyView() {
+
     }
 
     public static WeatherFragment newInstance() {

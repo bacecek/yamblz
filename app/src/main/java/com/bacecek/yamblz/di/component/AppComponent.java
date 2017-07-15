@@ -4,8 +4,8 @@ import com.bacecek.yamblz.data.repository.settings.SettingsManager;
 import com.bacecek.yamblz.di.module.AppModule;
 import com.bacecek.yamblz.di.module.NetworkModule;
 import com.bacecek.yamblz.data.network.service.WeatherJobService;
-import com.bacecek.yamblz.viewmodel.WeatherViewModel;
-import com.bacecek.yamblz.viewmodel.SettingsViewModel;
+import com.bacecek.yamblz.presenter.WeatherPresenter;
+import com.bacecek.yamblz.presenter.SettingsPresenter;
 
 import javax.inject.Singleton;
 
@@ -20,8 +20,8 @@ import dagger.Component;
 @Component(modules = {AppModule.class, NetworkModule.class})
 public interface AppComponent {
     void inject(WeatherJobService service);
-    void inject(WeatherViewModel viewModel);
-    void inject(SettingsViewModel viewModel);
+    void inject(WeatherPresenter viewModel);
+    void inject(SettingsPresenter viewModel);
 
     SettingsManager getSettings();
 }

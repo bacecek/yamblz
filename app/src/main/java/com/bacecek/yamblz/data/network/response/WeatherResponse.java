@@ -25,7 +25,11 @@ public class WeatherResponse {
 
     private int visibility;
 
-    private WindResponse wind;
+    @SerializedName("wind")
+    private WindResponse windInfo;
+
+    @SerializedName("dt")
+    private long updateTime;
 
     public List<ConditionResponse> getConditions() {
         return conditions;
@@ -40,7 +44,7 @@ public class WeatherResponse {
     }
 
     public WindResponse getWindInfo() {
-        return wind;
+        return windInfo;
     }
 
     public CloudsResponse getCloudsInfo() {
@@ -49,5 +53,9 @@ public class WeatherResponse {
 
     public InternalInfoResponse getInternalInfo() {
         return internalInfo;
+    }
+
+    public long getUpdateTime() {
+        return updateTime;
     }
 }

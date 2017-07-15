@@ -2,7 +2,7 @@ package com.bacecek.yamblz.data.repository.weather;
 
 import com.bacecek.yamblz.data.network.response.WeatherResponse;
 
-import io.reactivex.Single;
+import io.reactivex.Observable;
 
 /**
  * Created by Denis Buzmakov on 13.07.2017.
@@ -10,6 +10,6 @@ import io.reactivex.Single;
  */
 
 public interface WeatherRepository {
-    Single<WeatherResponse> getCurrentWeather(String city);
+    Observable<WeatherResponse> getCurrentWeather(String city);
     void saveLastWeather(WeatherResponse weather);
 }

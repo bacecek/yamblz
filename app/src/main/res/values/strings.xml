@@ -10,6 +10,7 @@
     <string name="humidity">Humidity</string>
     <string name="moscow">Moscow</string>
     <string name="moscow_request" translatable="false">moscow</string>
+    <string name="try_again">Try again</string>
 
     <!--Templates for showing weather information-->
     <string name="template_temperature_celsius">%1$.1f &#176;C</string>
@@ -41,26 +42,49 @@
 
     <!--Time intervals-->
     <string-array name="array_intervals_titles">
-        <item>5 min</item>
-        <item>10 min</item>
+        <item>Off</item>
         <item>30 min</item>
         <item>1 hour</item>
         <item>12 hours</item>
         <item>1 day</item>
-        <item>1 week</item>
     </string-array>
-    <!--При добавлении в интервала необходимо также добавить значение в секундах согласно позиции-->
+
     <integer-array name="array_intervals_values">
-        <item>300</item>
-        <item>600</item>
+        <item>0</item>
         <item>1800</item>
         <item>3600</item>
         <item>43200</item>
         <item>86400</item>
-        <item>604800</item>
     </integer-array>
 
     <!--Temperature units-->
     <string name="metric" translatable="false">metric</string>
     <string name="imperial" translatable="false">imperial</string>
+
+    <!--Time formats-->
+    <string name="format_sunrise">H:mm</string>
+    <string name="format_update_weather">EEEE h:mm a</string>
+
+    <!--Weather conditions ids-->
+    <string name="condition_sun_day" translatable="false">01d</string>
+    <string name="condition_sun_night" translatable="false">01n</string>
+    <string name="condition_sun_clouds_day" translatable="false">02d</string>
+    <string name="condition_sun_clouds_night" translatable="false">02n</string>
+    <string name="condition_clouds_day" translatable="false">03d</string>
+    <string name="condition_clouds_night" translatable="false">03n</string>
+    <string name="condition_broken_clouds_day" translatable="false">04d</string>
+    <string name="condition_broken_clouds_night" translatable="false">04n</string>
+    <string name="condition_rain_day" translatable="false">09d</string>
+    <string name="condition_rain_night" translatable="false">09n</string>
+    <string name="condition_sun_rain_day" translatable="false">10d</string>
+    <string name="condition_sun_rain_night" translatable="false">10n</string>
+    <string name="condition_storm_day" translatable="false">11d</string>
+    <string name="condition_storm_night" translatable="false">11n</string>
+    <string name="condition_snow_day" translatable="false">13d</string>
+    <string name="condition_snow_night" translatable="false">13n</string>
+    <string name="condition_mist_day" translatable="false">50d</string>
+    <string name="condition_mist_night" translatable="false">50n</string>
+
+    <!--Errors-->
+    <string name="error_network">Can\'t load weather info</string>
 </resources>

@@ -10,8 +10,19 @@ import com.google.gson.annotations.SerializedName;
 public class ConditionResponse {
     @SerializedName("id")
     private int conditionId;
+    @SerializedName("icon")
+    private String conditionIcon;
+    private String description;
 
     public int getConditionId() {
         return conditionId;
+    }
+
+    public String getConditionIcon() {
+        return conditionIcon;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

@@ -10,6 +10,7 @@
     <string name="wind">Ветер</string>
     <string name="humidity">Влажность</string>
     <string name="moscow">Москва</string>
+    <string name="try_again">Попробовать ещё раз</string>
 
     <!--Templates for showing weather information-->
     <string name="template_temperature_celsius">%1$.1f &#176;C</string>
@@ -37,12 +38,17 @@
 
     <!--Time intervals-->
     <string-array name="array_intervals_titles">
-        <item>5 мин</item>
-        <item>10 мин</item>
+        <item>Выкл.</item>
         <item>30 мин</item>
         <item>1 час</item>
         <item>12 часов</item>
         <item>1 день</item>
-        <item>1 неделя</item>
     </string-array>
+
+    <!--Time formats-->
+    <string name="format_sunrise">H:mm</string>
+    <string name="format_update_weather">EEEE H:mm</string>
+
+    <!--Errors-->
+    <string name="error_network">Can\'t load weather info</string>
 </resources>

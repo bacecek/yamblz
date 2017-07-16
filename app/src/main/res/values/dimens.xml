@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="size_icon_weather_additional_info">48dp</dimen>
+    <dimen name="padding_icon_weather_additional_info">6dp</dimen>
+
+    <dimen name="size_text_temperature">55sp</dimen>
+    <dimen name="size_text_update_time">18sp</dimen>
+    <dimen name="size_text_city">22sp</dimen>
+    <dimen name="margin_separator">16dp</dimen>
 </resources>

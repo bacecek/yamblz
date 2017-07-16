@@ -8,14 +8,18 @@ package com.bacecek.yamblz.data.presentation;
 public class WeatherInfo {
     private String currentTemperature;
     private int conditionId;
+    private String conditionIcon;
+    private String description;
     private int humidity;
     private double windSpeed;
     private String sunriseTime;
     private String updateTime;
 
-    public WeatherInfo(String currentTemperature, int conditionId, int humidity, double windSpeed, String sunriseTime, String updateTime) {
+    public WeatherInfo(String currentTemperature, int conditionId, String conditionIcon, String description, int humidity, double windSpeed, String sunriseTime, String updateTime) {
         this.currentTemperature = currentTemperature;
         this.conditionId = conditionId;
+        this.conditionIcon = conditionIcon;
+        this.description = description;
         this.humidity = humidity;
         this.windSpeed = windSpeed;
         this.sunriseTime = sunriseTime;
@@ -32,6 +36,14 @@ public class WeatherInfo {
 
     public int getConditionId() {
         return conditionId;
+    }
+
+    public String getConditionIcon() {
+        return conditionIcon;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public int getHumidity() {

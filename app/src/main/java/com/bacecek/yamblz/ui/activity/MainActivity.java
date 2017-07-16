@@ -24,12 +24,12 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.layout_drawer)
     DrawerLayout drawerLayout;
 
-    @OnClick(R.id.txt_about)
+    @OnClick(R.id.btn_about)
     void onClickAbout() {
         startActivity(new Intent(this, AboutActivity.class));
     }
 
-    @OnClick(R.id.txt_settings)
+    @OnClick(R.id.btn_settings)
     void onClickSettings() {
         startActivity(new Intent(this, SettingsActivity.class));
     }

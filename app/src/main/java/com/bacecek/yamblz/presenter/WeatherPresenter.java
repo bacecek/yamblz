@@ -92,9 +92,6 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
      * called when user do poll-to-refresh
      */
     public void onRefresh() {
-        if(getView() != null) {
-            getView().showLoading();
-        }
         loadWeather();
     }
 
@@ -111,6 +108,8 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
                 .map(result -> new WeatherInfo(
                         convertTemperature(result.getInfo().getCurrentTemperature(), settingsManager.getTemperatureUnits()),
                         result.getConditions().get(0).getConditionId(),
+                        result.getConditions().get(0).getConditionIcon(),
+                        result.getConditions().get(0).getDescription(),
                         result.getInfo().getHumidity(),
                         result.getWindInfo().getSpeed(),
                         formatSunriseTime(result.getInternalInfo().getSunrise()),
@@ -119,9 +118,29 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
                     currentWeatherInfo = result;
                     if (getView() != null) {
                         getView().hideLoading();
-                        getView().showWeatherInfo(result);
+                        if(result == null) {
+                            getView().showEmptyView();
+                        } else {
+                            getView().hideEmptyView();
+                            getView().showWeatherInfo(result);
+                        }
+                    }
+                }, error -> {
+                    currentWeatherInfo = null;
+                    if(getView() != null) {
+                        getView().hideLoading();
+                        getView().hideWeatherInfo();
+                        getView().showEmptyView();
                     }
                 });
+    }
+
+    public void onTryAgain() {
+        if(getView() != null) {
+            getView().hideEmptyView();
+            getView().showLoading();
+        }
+        loadWeather();
     }
 
     /**
@@ -152,7 +171,7 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
     private String formatSunriseTime(long time) {
         if(time == 0) return null;
         Date date = new Date(time * 1000);
-        SimpleDateFormat convertFormat = new SimpleDateFormat("H:mm", Locale.getDefault());
+        SimpleDateFormat convertFormat = new SimpleDateFormat(resources.getString(R.string.format_sunrise), Locale.getDefault());
         convertFormat.setTimeZone(TimeZone.getDefault());
         return convertFormat.format(date);
     }
@@ -166,7 +185,7 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
     private String formatUpdateTime(long time) {
         if(time == 0) return null;
         Date date = new Date(time * 1000);
-        SimpleDateFormat convertFormat = new SimpleDateFormat("EEEE H:mm", Locale.getDefault());
+        SimpleDateFormat convertFormat = new SimpleDateFormat(resources.getString(R.string.format_update_weather), Locale.getDefault());
         convertFormat.setTimeZone(TimeZone.getDefault());
         return convertFormat.format(date);
     }

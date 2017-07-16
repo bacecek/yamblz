@@ -8,6 +8,7 @@ import com.bacecek.yamblz.di.module.AppModule;
 import com.bacecek.yamblz.di.module.NetworkModule;
 import com.bacecek.yamblz.data.network.service.WeatherJobService;
 import com.bacecek.yamblz.util.Consts;
+import com.crashlytics.android.Crashlytics;
 import com.facebook.stetho.Stetho;
 import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
@@ -16,6 +17,8 @@ import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.Trigger;
 
+import io.fabric.sdk.android.Fabric;
+import io.fabric.sdk.android.services.common.Crash;
 import timber.log.Timber;
 
 /**
@@ -44,6 +47,7 @@ public class App extends Application {
             Timber.plant(new Timber.DebugTree());
             Stetho.initializeWithDefaults(getApplicationContext());
         }
+        Fabric.with(this, new Crashlytics());
     }
 
     /**

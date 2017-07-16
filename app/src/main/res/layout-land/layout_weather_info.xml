@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_update_time"
         app:layout_constraintBottom_toTopOf="@+id/txt_temperature"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/separator"
+        app:layout_constraintRight_toRightOf="parent"
         tools:ignore="ContentDescription" />
 
     <TextView
@@ -50,7 +50,7 @@
         android:textColor="@color/colorTextBlack"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/txt_description"
-        app:layout_constraintRight_toLeftOf="@+id/separator"
+        app:layout_constraintRight_toRightOf="parent"
         tools:text="56"/>
 
     <TextView
@@ -63,7 +63,7 @@
         android:layout_marginBottom="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/separator"/>
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <android.support.constraint.Guideline
         android:layout_width="0dp"

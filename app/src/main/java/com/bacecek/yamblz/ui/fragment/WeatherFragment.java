@@ -96,17 +96,23 @@ public class WeatherFragment extends LifecycleFragment implements WeatherPresent
 
         int drawableCondition = 0;
         String conditionIcon = weatherInfo.getConditionIcon();
-        if(conditionIcon.equals(getString(R.string.condition_sun_day)) || conditionIcon.equals(getString(R.string.condition_sun_night))) {
+        if(conditionIcon.equals(getString(R.string.condition_sun_day))) {
             drawableCondition = R.drawable.condition_sun;
-        } else if(conditionIcon.equals(getString(R.string.condition_sun_clouds_day)) || conditionIcon.equals(getString(R.string.condition_sun_clouds_night))) {
+        } else if(conditionIcon.equals(getString(R.string.condition_sun_night))) {
+            drawableCondition = R.drawable.condition_moon;
+        } else if(conditionIcon.equals(getString(R.string.condition_sun_clouds_day))) {
             drawableCondition = R.drawable.condition_sun_clouds;
-        } else if(conditionIcon.equals(getString(R.string.condition_clouds_day)) || conditionIcon.equals(getString(R.string.condition_sun_clouds_night)) ||
+        } else if(conditionIcon.equals(getString(R.string.condition_sun_clouds_night))) {
+            drawableCondition = R.drawable.condition_moon_clouds;
+        } else if(conditionIcon.equals(getString(R.string.condition_clouds_day)) || conditionIcon.equals(getString(R.string.condition_clouds_night)) ||
                 conditionIcon.equals(getString(R.string.condition_broken_clouds_day)) || conditionIcon.equals(getString(R.string.condition_broken_clouds_night))) {
             drawableCondition = R.drawable.condition_clouds;
         } else if(conditionIcon.equals(getString(R.string.condition_rain_day)) || conditionIcon.equals(getString(R.string.condition_rain_night))) {
             drawableCondition = R.drawable.condition_rain;
-        } else if(conditionIcon.equals(getString(R.string.condition_sun_rain_day)) || conditionIcon.equals(getString(R.string.condition_sun_rain_night))) {
+        } else if(conditionIcon.equals(getString(R.string.condition_sun_rain_day))) {
             drawableCondition = R.drawable.condition_sun_rain;
+        } else if(conditionIcon.equals(getString(R.string.condition_sun_rain_night))) {
+            drawableCondition = R.drawable.condition_moon_rain;
         } else if(conditionIcon.equals(getString(R.string.condition_storm_day)) || conditionIcon.equals(getString(R.string.condition_storm_night))) {
             drawableCondition = R.drawable.condition_storm;
         } else if(conditionIcon.equals(getString(R.string.condition_snow_day)) || conditionIcon.equals(getString(R.string.condition_snow_night))) {

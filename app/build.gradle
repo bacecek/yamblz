@@ -101,6 +101,10 @@ dependencies {
     implementation "com.facebook.stetho:stetho:$stetho_version"
     implementation "com.facebook.stetho:stetho-okhttp3:$stetho_version"
 
+    //leak canary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
+
     //other
     implementation "com.jakewharton.timber:timber:$timber_version"
     compile("com.crashlytics.sdk.android:crashlytics:$crashlytics_version@aar") {

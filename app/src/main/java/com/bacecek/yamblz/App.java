@@ -16,9 +16,9 @@ import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.Trigger;
+import com.squareup.leakcanary.LeakCanary;
 
 import io.fabric.sdk.android.Fabric;
-import io.fabric.sdk.android.services.common.Crash;
 import timber.log.Timber;
 
 /**
@@ -48,6 +48,7 @@ public class App extends Application {
             Stetho.initializeWithDefaults(getApplicationContext());
         }
         Fabric.with(this, new Crashlytics());
+        LeakCanary.install(this);
     }
 
     /**

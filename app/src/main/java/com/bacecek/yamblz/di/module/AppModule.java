@@ -8,6 +8,8 @@ import android.preference.PreferenceManager;
 import com.bacecek.yamblz.data.repository.settings.SettingsManager;
 import com.bacecek.yamblz.data.repository.settings.SettingsManagerImpl;
 import com.bacecek.yamblz.util.AppResources;
+import com.bacecek.yamblz.util.SystemServiceProvider;
+import com.bacecek.yamblz.util.Utils;
 import com.f2prateek.rx.preferences2.RxSharedPreferences;
 
 import javax.inject.Singleton;
@@ -57,5 +59,17 @@ public class AppModule {
     @Singleton
     SettingsManager provideSettings(SharedPreferences preferences, RxSharedPreferences rxPreferences, AppResources resources) {
         return new SettingsManagerImpl(preferences, rxPreferences, resources);
+    }
+
+    @Provides
+    @Singleton
+    SystemServiceProvider provideSystemServiceProvider(Context context) {
+        return new SystemServiceProvider(context);
+    }
+
+    @Provides
+    @Singleton
+    Utils provideUtils(AppResources resources, SystemServiceProvider serviceProvider) {
+        return new Utils(resources, serviceProvider);
     }
 }

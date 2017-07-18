@@ -22,14 +22,14 @@ import timber.log.Timber;
 
 public class WeatherRepositoryImpl implements WeatherRepository {
 
-    private Context context;
+    private Utils utils;
     private WeatherApi weatherApi;
     private RxSharedPreferences rxPreferences;
     private SharedPreferences preferences;
     private AppResources resources;
 
-    public WeatherRepositoryImpl(Context context, WeatherApi api, RxSharedPreferences rxPreferences, SharedPreferences preferences, AppResources resources) {
-        this.context = context.getApplicationContext();
+    public WeatherRepositoryImpl(Utils utils, WeatherApi api, RxSharedPreferences rxPreferences, SharedPreferences preferences, AppResources resources) {
+        this.utils = utils;
         weatherApi = api;
         this.rxPreferences = rxPreferences;
         this.preferences = preferences;
@@ -38,7 +38,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
 
     @Override
     public Observable<WeatherResponse> getCurrentWeather(String city) {
-        if(Utils.isOnline(context)) {
+        if(utils.isOnline()) {
             Timber.d("get weather from api");
             return weatherApi.getCurrentWeather(city)
                     .subscribeOn(Schedulers.io());

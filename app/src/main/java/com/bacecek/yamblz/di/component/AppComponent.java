@@ -6,6 +6,7 @@ import com.bacecek.yamblz.di.module.NetworkModule;
 import com.bacecek.yamblz.data.network.service.WeatherJobService;
 import com.bacecek.yamblz.presenter.WeatherPresenter;
 import com.bacecek.yamblz.presenter.SettingsPresenter;
+import com.bacecek.yamblz.util.Utils;
 
 import javax.inject.Singleton;
 
@@ -24,4 +25,5 @@ public interface AppComponent {
     void inject(SettingsPresenter viewModel);
 
     SettingsManager getSettings();
+    Utils getUtils();//TODO: remove
 }

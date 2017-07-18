@@ -9,6 +9,7 @@ import com.bacecek.yamblz.data.network.WeatherApi;
 import com.bacecek.yamblz.data.repository.weather.WeatherRepository;
 import com.bacecek.yamblz.data.repository.weather.WeatherRepositoryImpl;
 import com.bacecek.yamblz.util.AppResources;
+import com.bacecek.yamblz.util.Utils;
 import com.f2prateek.rx.preferences2.RxSharedPreferences;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
@@ -71,13 +72,13 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    WeatherRepository provideWeatherRepository(Context context,
+    WeatherRepository provideWeatherRepository(Utils utils,
                                                WeatherApi api,
                                                RxSharedPreferences rxPreferences,
                                                SharedPreferences preferences,
                                                AppResources resources) {
         return new WeatherRepositoryImpl(
-                context,
+                utils,
                 api,
                 rxPreferences,
                 preferences,

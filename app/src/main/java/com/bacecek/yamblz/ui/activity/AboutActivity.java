@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bacecek.yamblz.App;
 import com.bacecek.yamblz.BuildConfig;
 import com.bacecek.yamblz.R;
 import com.bacecek.yamblz.util.Utils;
@@ -44,7 +45,7 @@ public class AboutActivity extends BaseActivity {
             startActivity(Intent.createChooser(sendIntent, getString(R.string.about_contact_via)));
         } catch (ActivityNotFoundException e) {
             Toast.makeText(getApplicationContext(), R.string.error_no_email_app, Toast.LENGTH_SHORT).show();
-            Utils.copyToClipboard(getApplicationContext(), getString(R.string.about_email));
+            App.getAppComponent().getUtils().copyToClipboard(getString(R.string.about_email));
         }
     }
 

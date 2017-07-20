@@ -27,19 +27,19 @@ public class SettingsManagerImpl implements SettingsManager {
 
     @Override
     public String getTemperatureUnits() {
-        return preferences.getString(Consts.Prefs.KEY_UNITS, resources.getString(R.string.metric));
+        return preferences.getString(Consts.Prefs.KEY_TEMP_UNITS, resources.getString(R.string.metric));
     }
 
     @Override
     public void saveTemperatureUnits(String units) {
         preferences.edit()
-                .putString(Consts.Prefs.KEY_UNITS, units)
+                .putString(Consts.Prefs.KEY_TEMP_UNITS, units)
                 .apply();
     }
 
     @Override
     public Observable<String> getTemperatureUnitsObservable() {
-        return rxPreferences.getString(Consts.Prefs.KEY_UNITS, resources.getString(R.string.metric))
+        return rxPreferences.getString(Consts.Prefs.KEY_TEMP_UNITS, resources.getString(R.string.metric))
                 .asObservable();
     }
 

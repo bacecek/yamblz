@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Denis Buzmakov on 18.07.2017.
@@ -37,16 +38,16 @@ public class Utils {
      * @return - converted temperature
      */
     @Nullable
-    public String convertTemperature(double temperature, @NonNull String units) {
-        String result = null;
+    public String convertAndFormatTemperatureFromKelvin(double temperature, String units) {
+        if(units == null) return null;
         if(units.equals(resources.getString(R.string.metric))) {
             double resultTemperature = temperature - 273.15;
-            result = resources.getString(R.string.template_temperature_celsius, resultTemperature);
+            return resources.getString(R.string.template_temperature_celsius, resultTemperature);
         } else if(units.equals(resources.getString(R.string.imperial))) {
             double resultTemperature = temperature * 9 / 5 - 459.67;
-            result = resources.getString(R.string.template_temperature_fahrenheit, resultTemperature);
+            return resources.getString(R.string.template_temperature_fahrenheit, resultTemperature);
         }
-        return result;
+        return null;
     }
 
     /**
@@ -58,7 +59,7 @@ public class Utils {
     @Nullable
     public String formatUnixTime(long time, String pattern) {
         if(time == 0) return null;
-        Date date = new Date(time * 1000);
+        Date date = new Date(TimeUnit.SECONDS.toMillis(time));
         SimpleDateFormat convertFormat = new SimpleDateFormat(pattern, Locale.getDefault());
         convertFormat.setTimeZone(TimeZone.getDefault());
         return convertFormat.format(date);

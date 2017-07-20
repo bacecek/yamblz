@@ -27,7 +27,6 @@ import butterknife.OnClick;
  */
 
 public class WeatherFragment extends LifecycleFragment implements WeatherPresenter.WeatherView {
-    private static final String KEY_WEATHER = "current_weather";
     private WeatherPresenter presenter;
 
     @BindView(R.id.txt_city)

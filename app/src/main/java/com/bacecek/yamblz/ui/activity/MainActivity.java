@@ -24,6 +24,8 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.layout_drawer)
     DrawerLayout drawerLayout;
 
+    private ActionBarDrawerToggle actionBarToggle;
+
     @OnClick(R.id.btn_about)
     void onClickAbout() {
         startActivity(new Intent(this, AboutActivity.class));
@@ -33,8 +35,6 @@ public class MainActivity extends BaseActivity {
     void onClickSettings() {
         startActivity(new Intent(this, SettingsActivity.class));
     }
-
-    private ActionBarDrawerToggle actionBarToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +51,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    /**
-     * toolbar initialization
-     */
     private void initToolbar() {
         setSupportActionBar(toolbar);
         setTitle(null);

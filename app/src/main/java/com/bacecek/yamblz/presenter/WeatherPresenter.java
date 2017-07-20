@@ -38,7 +38,7 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
                 .subscribe(units -> {
                     if(currentWeatherInfo != null && currentWeatherResponse != null) {
                         double currentTemperature = currentWeatherResponse.getInfo().getCurrentTemperature();
-                        currentWeatherInfo.setCurrentTemperature(weatherUtils.convertTemperature(currentTemperature, units));
+                        currentWeatherInfo.setCurrentTemperature(weatherUtils.convertAndFormatTemperatureFromKelvin(currentTemperature, units));
                         if(getView() != null) {
                             getView().showWeatherInfo(currentWeatherInfo);
                         }
@@ -104,7 +104,7 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
                     currentWeatherResponse = result;
                 })
                 .map(result -> new WeatherInfo(
-                        weatherUtils.convertTemperature(result.getInfo().getCurrentTemperature(), settingsManager.getTemperatureUnits()),
+                        weatherUtils.convertAndFormatTemperatureFromKelvin(result.getInfo().getCurrentTemperature(), settingsManager.getTemperatureUnits()),
                         result.getConditions().get(0).getConditionId(),
                         result.getConditions().get(0).getConditionIcon(),
                         result.getConditions().get(0).getDescription(),

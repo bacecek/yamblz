@@ -33,7 +33,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        initDI(); //должно всегда быть первым, т.к. после него идет иницизация и запуск сервиса, в котором нужен DI
+        initDI(); //must always be first because weather service needs DI
         initLibraries();
         startWeatherService();
     }
@@ -51,9 +51,6 @@ public class App extends Application {
         LeakCanary.install(this);
     }
 
-    /**
-     * Инициализация Dagger'a
-     */
     private void initDI() {
         sAppComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
@@ -61,9 +58,6 @@ public class App extends Application {
                 .build();
     }
 
-    /**
-     * Запуск сервиса обновления погоды
-     */
     private void startWeatherService() {
         sAppComponent.getSettings().getUpdateIntervalObservable()
                 .subscribe(interval -> {
@@ -78,7 +72,7 @@ public class App extends Application {
                                 .setConstraints(Constraint.ON_ANY_NETWORK)
                                 .setRecurring(true)
                                 .setReplaceCurrent(true)
-                                .setTrigger(Trigger.executionWindow((int) (interval / 1.5), (int) (interval * 1.5)))
+                                .setTrigger(Trigger.executionWindow(interval - Consts.UPDATE_INTERVAL_WINDOW, interval + Consts.UPDATE_INTERVAL_WINDOW))
                                 .build();
                         dispatcher.mustSchedule(job);
                     }

@@ -31,4 +31,10 @@ public class BasePresenter<T extends BaseView> extends ViewModel {
         return this.view;
     }
 
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        onDestroy();
+    }
 }

@@ -14,7 +14,7 @@ import javax.inject.Inject;
 public class SettingsPresenter extends BasePresenter<SettingsPresenter.SettingsView> {
 
     public interface SettingsView extends BaseView {
-        void updateUnits(String units);
+        void updateTempUnits(String units);
         void updateInterval(int interval);
     }
 
@@ -25,26 +25,26 @@ public class SettingsPresenter extends BasePresenter<SettingsPresenter.SettingsV
     @Inject
     SettingsManager settingsManager;
 
-    private String currentUnits;
+    private String currentTempUnits;
     private int currentInterval = Integer.MIN_VALUE;
 
     @Override
     public void onAttach(SettingsView view) {
         super.onAttach(view);
 
-        if(currentUnits != null) view.updateUnits(currentUnits);
-        else getUnits();
+        if(currentTempUnits != null) view.updateTempUnits(currentTempUnits);
+        else getTempUnits();
 
         if(currentInterval != Integer.MIN_VALUE) view.updateInterval(currentInterval);
         else getUpdateInterval();
     }
 
-    private void getUnits() {
+    private void getTempUnits() {
         settingsManager.getTemperatureUnitsObservable()
                 .subscribe(units -> {
-                    currentUnits = units;
+                    currentTempUnits = units;
                     if(getView() != null) {
-                        getView().updateUnits(units);
+                        getView().updateTempUnits(units);
                     }
                 });
     }
@@ -59,7 +59,7 @@ public class SettingsPresenter extends BasePresenter<SettingsPresenter.SettingsV
                 });
     }
 
-    public void onChangeUnits(String units) {
+    public void onChangeTempUnits(String units) {
         settingsManager.saveTemperatureUnits(units);
     }
 

@@ -15,7 +15,14 @@ public class WeatherInfo {
     private String sunriseTime;
     private String updateTime;
 
-    public WeatherInfo(String currentTemperature, int conditionId, String conditionIcon, String description, int humidity, double windSpeed, String sunriseTime, String updateTime) {
+    public WeatherInfo(String currentTemperature,
+                       int conditionId,
+                       String conditionIcon,
+                       String description,
+                       int humidity,
+                       double windSpeed,
+                       String sunriseTime,
+                       String updateTime) {
         this.currentTemperature = currentTemperature;
         this.conditionId = conditionId;
         this.conditionIcon = conditionIcon;

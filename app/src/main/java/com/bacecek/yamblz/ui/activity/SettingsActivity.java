@@ -23,14 +23,16 @@ public class SettingsActivity extends BaseActivity implements ChooseUpdateInterv
     @BindView(R.id.txt_settings_period)
     TextView txtUpdatePeriod;
 
-    @OnClick(R.id.settings_units)
-    void onClickSwitchUnits() {
+    private SettingsPresenter presenter;
+
+    @OnClick(R.id.settings_temp_units)
+    void onClickSwitchTempUnits() {
         switch (switchTemperature.getState()) {
             case SwitchTemperature.State.CELSIUS:
-                presenter.onChangeUnits(getString(R.string.imperial));
+                presenter.onChangeTempUnits(getString(R.string.imperial));
                 break;
             case SwitchTemperature.State.FAHRENHEIT:
-                presenter.onChangeUnits(getString(R.string.metric));
+                presenter.onChangeTempUnits(getString(R.string.metric));
                 break;
         }
     }
@@ -39,8 +41,6 @@ public class SettingsActivity extends BaseActivity implements ChooseUpdateInterv
     void onClickChooseInterval() {
         ChooseUpdateIntervalFragment.newInstance().show(getSupportFragmentManager(), "choose dialog");
     }
-
-    private SettingsPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class SettingsActivity extends BaseActivity implements ChooseUpdateInterv
     }
 
     @Override
-    public void updateUnits(String units) {
+    public void updateTempUnits(String units) {
         if(units.equals(getString(R.string.metric))) {
             switchTemperature.setState(SwitchTemperature.State.CELSIUS);
         } else if(units.equals(getString(R.string.imperial))) {

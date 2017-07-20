@@ -26,7 +26,7 @@ import butterknife.OnClick;
  * <buzmakov.da@gmail.com>
  */
 
-public class WeatherFragment extends LifecycleFragment implements WeatherPresenter.WeatherView {
+public class WeatherFragment extends BaseFragment implements WeatherPresenter.WeatherView {
     private WeatherPresenter presenter;
 
     @BindView(R.id.txt_city)
@@ -59,18 +59,15 @@ public class WeatherFragment extends LifecycleFragment implements WeatherPresent
         presenter.onTryAgain();
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_weather, container, false);
-        ButterKnife.bind(this, layout);
-        swipeRefreshLayout.setOnRefreshListener(() -> presenter.onRefresh());
-        return layout;
+    protected View createLayout(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_weather, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        swipeRefreshLayout.setOnRefreshListener(() -> presenter.onRefresh());
         presenter = ViewModelProviders.of(this).get(WeatherPresenter.class);
         presenter.onAttach(this);
     }

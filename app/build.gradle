@@ -1,20 +1,39 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion rootProject.ext.compileSdk
     buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.bacecek.yamblz"
-        minSdkVersion 21
-        targetSdkVersion 25
-        versionCode 1
+        minSdkVersion rootProject.ext.minSdk
+        targetSdkVersion rootProject.ext.targetSdk
+        versionCode rootProject.ext.versionCode
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "API_WEATHER_KEY",
+                "\"a5628ee4c36c6009a88a491a2a2cfdbf\""
+        buildConfigField "String", "API_WEATHER_URL",
+                "\"http://api.openweathermap.org/data/2.5/\""
+
+        vectorDrawables.useSupportLibrary = true
+    }
+    signingConfigs {
+        debug {
+            storeFile file("keystores/debug.keystore")
+        }
+        release {
+            storeFile file("keystores/release.jks")
+            storePassword "lolkek"
+            keyAlias "yamblz"
+            keyPassword "azazatormoza"
+        }
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
@@ -39,4 +58,34 @@ dependencies {
     //butterknife
     implementation "com.jakewharton:butterknife:$butterknife_version"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
+
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_version"
+
+    //jobdispatcher
+    implementation "com.firebase:firebase-jobdispatcher:$jobdispatcher_version"
+
+    //rx
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "com.f2prateek.rx.preferences2:rx-preferences:$rxprefs_version"
+
+    //dagger
+    implementation "com.google.dagger:dagger:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+
+    //architecture components
+    implementation "android.arch.lifecycle:runtime:$arch_components_version"
+    implementation "android.arch.lifecycle:extensions:$arch_components_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$arch_components_version"
+
+    //stetho
+    implementation "com.facebook.stetho:stetho:$stetho_version"
+    implementation "com.facebook.stetho:stetho-okhttp3:$stetho_version"
+
+    //other
+    implementation "com.jakewharton.timber:timber:$timber_version"
 }

@@ -4,6 +4,19 @@
 
     <string name="drawer_open">Открыть боковое меню</string>
     <string name="drawer_close">Закрыть боковое меню</string>
+    <string name="cancel">Отмена</string>
+    <string name="ok">ОК</string>
+    <string name="sunrise">Восход Солнца</string>
+    <string name="wind">Ветер</string>
+    <string name="humidity">Влажность</string>
+    <string name="moscow">Москва</string>
+    <string name="try_again">Попробовать ещё раз</string>
+
+    <!--Templates for showing weather information-->
+    <string name="template_temperature_celsius">%1$.1f &#176;C</string>
+    <string name="template_temperature_fahrenheit">%1$.1f &#176;F</string>
+    <string name="template_wind_speed">%1$.1f м/с</string>
+    <string name="template_humidity">%1$d%%</string>
 
     <!--Actions-->
     <string name="action_settings">Настройки</string>
@@ -18,4 +31,24 @@
     <string name="about_contact_me">Обратная связь</string>
     <string name="about_source_code_title">Исходный код на GitHub</string>
     <string name="about_contact_via">Написать с помощью…</string>
+
+    <!--Settings-->
+    <string name="settings_units_title">Температура</string>
+    <string name="settings_period_title">Период обновления информации о погоде</string>
+
+    <!--Time intervals-->
+    <string-array name="array_intervals_titles">
+        <item>Выкл.</item>
+        <item>30 мин</item>
+        <item>1 час</item>
+        <item>12 часов</item>
+        <item>1 день</item>
+    </string-array>
+
+    <!--Time formats-->
+    <string name="format_sunrise">H:mm</string>
+    <string name="format_update_weather">EEEE H:mm</string>
+
+    <!--Errors-->
+    <string name="error_network">Can\'t load weather info</string>
 </resources>

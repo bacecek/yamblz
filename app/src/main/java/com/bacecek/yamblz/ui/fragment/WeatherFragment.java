@@ -1,6 +1,5 @@
 package com.bacecek.yamblz.ui.fragment;
 
-import android.arch.lifecycle.LifecycleFragment;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,7 +17,6 @@ import com.bacecek.yamblz.data.presentation.WeatherInfo;
 import com.bacecek.yamblz.presenter.WeatherPresenter;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -82,7 +80,7 @@ public class WeatherFragment extends BaseFragment implements WeatherPresenter.We
     public void showWeatherInfo(@NonNull WeatherInfo weatherInfo) {
         layoutWeather.setVisibility(View.VISIBLE);
 
-        txtCity.setText(getString(R.string.moscow));//TODO:change city from response in the future
+        txtCity.setText(weatherInfo.getCity());
         txtUpdateTime.setText(weatherInfo.getUpdateTime());
         txtTemperature.setText(weatherInfo.getCurrentTemperature());
         txtDescription.setText(weatherInfo.getDescription());//TODO:get this from resources

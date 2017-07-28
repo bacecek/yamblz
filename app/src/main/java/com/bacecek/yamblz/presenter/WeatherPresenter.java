@@ -87,7 +87,7 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
     }
 
     /**
-     * called when user do poll-to-refresh
+     * called when user do pull-to-refresh
      */
     public void onRefresh() {
         loadWeather();
@@ -97,13 +97,14 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
      * load weather info from repository
      */
     private void loadWeather() {
-        weatherRepository.getCurrentWeather(resources.getString(R.string.moscow_request))
+        weatherRepository.getCurrentWeather()
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(result -> {
                     weatherRepository.saveLastWeather(result);
                     currentWeatherResponse = result;
                 })
                 .map(result -> new WeatherInfo(
+                        settingsManager.getCityName(),
                         weatherUtils.convertAndFormatTemperatureFromKelvin(result.getInfo().getCurrentTemperature(), settingsManager.getTemperatureUnits()),
                         result.getConditions().get(0).getConditionId(),
                         result.getConditions().get(0).getConditionIcon(),

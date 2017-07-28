@@ -1,8 +1,11 @@
 package com.bacecek.yamblz.data.repository.settings;
 
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.bacecek.yamblz.R;
+import com.bacecek.yamblz.data.presentation.CityCoords;
 import com.bacecek.yamblz.util.AppResources;
 import com.bacecek.yamblz.util.Consts;
 import com.f2prateek.rx.preferences2.RxSharedPreferences;
@@ -59,5 +62,81 @@ public class SettingsManagerImpl implements SettingsManager {
     public Observable<Integer> getUpdateIntervalObservable() {
         return rxPreferences.getInteger(Consts.Prefs.KEY_UPDATE_INTERVAL, Consts.DEFAULT_UPDATE_INTERVAL)
                 .asObservable();
+    }
+
+    @Nullable
+    @Override
+    public String getCityId() {
+        return preferences.getString(Consts.Prefs.KEY_CITY_ID, null);
+    }
+
+    @Override
+    public void saveCityId(@NonNull String cityId) {
+        preferences.edit()
+                .putString(Consts.Prefs.KEY_CITY_ID, cityId)
+                .apply();
+    }
+
+    @NonNull
+    @Override
+    public Observable<String> getCityIdObservable() {
+        return rxPreferences.getString(Consts.Prefs.KEY_CITY_ID)
+                .asObservable();
+    }
+
+    @Nullable
+    @Override
+    public String getCityName() {
+        return preferences.getString(Consts.Prefs.KEY_CITY_NAME, null);
+    }
+
+    @Override
+    public void saveCityName(@NonNull String cityName) {
+        preferences.edit()
+                .putString(Consts.Prefs.KEY_CITY_NAME, cityName)
+                .apply();
+    }
+
+    @NonNull
+    @Override
+    public Observable<String> getCityNameObservable() {
+        return rxPreferences.getString(Consts.Prefs.KEY_CITY_NAME)
+                .asObservable();
+    }
+
+    @Override
+    public CityCoords getCityCoords() {
+        float longitude = preferences.getFloat(Consts.Prefs.KEY_CITY_LON, Float.MIN_VALUE);
+        float latitude = preferences.getFloat(Consts.Prefs.KEY_CITY_LAT, Float.MIN_VALUE);
+        if (longitude == Float.MIN_VALUE || latitude == Float.MIN_VALUE) {
+            return null;
+        } else {
+            return new CityCoords.Builder()
+                    .setLongitude(longitude)
+                    .setLatitude(latitude)
+                    .build();
+        }
+    }
+
+    @Override
+    public void saveCityCoords(@NonNull CityCoords cityCoords) {
+        preferences.edit()
+                .putFloat(Consts.Prefs.KEY_CITY_LON, cityCoords.getLongitude())
+                .putFloat(Consts.Prefs.KEY_CITY_LAT, cityCoords.getLatitude())
+                .apply();
+    }
+
+    @NonNull
+    @Override
+    public Observable<CityCoords> getCityCoordsObservable() {
+        Observable<Float> longitude = rxPreferences.getFloat(Consts.Prefs.KEY_CITY_LON)
+                .asObservable();
+        Observable<Float> latitude = rxPreferences.getFloat(Consts.Prefs.KEY_CITY_LAT)
+                .asObservable();
+
+        return Observable.just(new CityCoords.Builder())
+                .zipWith(longitude, CityCoords.Builder::setLongitude)
+                .zipWith(latitude, CityCoords.Builder::setLatitude)
+                .map(CityCoords.Builder::build);
     }
 }

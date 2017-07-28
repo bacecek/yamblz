@@ -51,4 +51,6 @@
 
     <!--Errors-->
     <string name="error_network">Can\'t load weather info</string>
+    <string name="choose_city_hint">Введите название города</string>
+    <string name="settings_city_title">Город</string>
 </resources>

@@ -2,11 +2,14 @@ package com.bacecek.yamblz.ui.activity;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.bacecek.yamblz.R;
+import com.bacecek.yamblz.data.presentation.City;
 import com.bacecek.yamblz.presenter.SettingsPresenter;
+import com.bacecek.yamblz.ui.fragment.ChooseCityFragment;
 import com.bacecek.yamblz.ui.fragment.ChooseUpdateIntervalFragment;
 import com.bacecek.yamblz.ui.widget.SwitchTemperature;
 
@@ -14,7 +17,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingsActivity extends BaseActivity implements ChooseUpdateIntervalFragment.OnChooseUpdateIntervalListener, SettingsPresenter.SettingsView {
+public class SettingsActivity extends BaseActivity implements
+        ChooseUpdateIntervalFragment.OnChooseUpdateIntervalListener,
+        ChooseCityFragment.OnChooseCityListener,
+        SettingsPresenter.SettingsView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -22,6 +28,8 @@ public class SettingsActivity extends BaseActivity implements ChooseUpdateInterv
     SwitchTemperature switchTemperature;
     @BindView(R.id.txt_settings_period)
     TextView txtUpdatePeriod;
+    @BindView(R.id.txt_city)
+    TextView txtCity;
 
     private SettingsPresenter presenter;
 
@@ -39,7 +47,12 @@ public class SettingsActivity extends BaseActivity implements ChooseUpdateInterv
 
     @OnClick(R.id.settings_interval_update)
     void onClickChooseInterval() {
-        ChooseUpdateIntervalFragment.newInstance().show(getSupportFragmentManager(), "choose dialog");
+        ChooseUpdateIntervalFragment.newInstance().show(getSupportFragmentManager(), "choose interval dialog");
+    }
+
+    @OnClick(R.id.settings_city)
+    void onClickChooseCity() {
+        ChooseCityFragment.newInstance().show(getSupportFragmentManager(), "choose city dialog");
     }
 
     @Override
@@ -69,9 +82,9 @@ public class SettingsActivity extends BaseActivity implements ChooseUpdateInterv
 
     @Override
     public void updateTempUnits(String units) {
-        if(units.equals(getString(R.string.metric))) {
+        if (units.equals(getString(R.string.metric))) {
             switchTemperature.setState(SwitchTemperature.State.CELSIUS);
-        } else if(units.equals(getString(R.string.imperial))) {
+        } else if (units.equals(getString(R.string.imperial))) {
             switchTemperature.setState(SwitchTemperature.State.FAHRENHEIT);
         }
     }
@@ -81,20 +94,30 @@ public class SettingsActivity extends BaseActivity implements ChooseUpdateInterv
         int positionInArrayOfIntervals = -1;
         int[] intervalArrayValues = getResources().getIntArray(R.array.array_intervals_values);
         String[] intervalArrayTitles = getResources().getStringArray(R.array.array_intervals_titles);
-        for(int i = 0; i < intervalArrayValues.length; i++) {
-            if(interval == intervalArrayValues[i]) {
+        for (int i = 0; i < intervalArrayValues.length; i++) {
+            if (interval == intervalArrayValues[i]) {
                 positionInArrayOfIntervals = i;
                 break;
             }
         }
-        if(positionInArrayOfIntervals != -1) {
+        if (positionInArrayOfIntervals != -1) {
             String intervalTitle = intervalArrayTitles[positionInArrayOfIntervals];
             txtUpdatePeriod.setText(intervalTitle);
         }
     }
 
     @Override
+    public void updateCity(String city) {
+        txtCity.setText(city);
+    }
+
+    @Override
     public void onChooseInterval(int interval) {
         presenter.onChangeUpdateInterval(interval);
+    }
+
+    @Override
+    public void onChooseCity(@NonNull City city) {
+        presenter.onChangeCity(city.getName());
     }
 }

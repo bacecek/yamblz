@@ -39,6 +39,7 @@
     <string name="settings_units_celsius" translatable="false">&#176;C</string>
     <string name="settings_units_fahrenheit" translatable="false">&#176;F</string>
     <string name="settings_period_title">Update the weather every</string>
+    <string name="settings_city_title">City</string>
 
     <!--Time intervals-->
     <string-array name="array_intervals_titles">
@@ -87,4 +88,7 @@
 
     <!--Errors-->
     <string name="error_network">Can\'t load weather info</string>
+
+    <!--Place-->
+    <string name="choose_city_hint">Type city name</string>
 </resources>

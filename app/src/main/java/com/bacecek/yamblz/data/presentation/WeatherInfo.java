@@ -6,6 +6,7 @@ package com.bacecek.yamblz.data.presentation;
  */
 
 public class WeatherInfo {
+    private String city;
     private String currentTemperature;
     private int conditionId;
     private String conditionIcon;
@@ -15,7 +16,8 @@ public class WeatherInfo {
     private String sunriseTime;
     private String updateTime;
 
-    public WeatherInfo(String currentTemperature,
+    public WeatherInfo(String city,
+                       String currentTemperature,
                        int conditionId,
                        String conditionIcon,
                        String description,
@@ -23,6 +25,7 @@ public class WeatherInfo {
                        double windSpeed,
                        String sunriseTime,
                        String updateTime) {
+        this.city = city;
         this.currentTemperature = currentTemperature;
         this.conditionId = conditionId;
         this.conditionIcon = conditionIcon;
@@ -31,6 +34,14 @@ public class WeatherInfo {
         this.windSpeed = windSpeed;
         this.sunriseTime = sunriseTime;
         this.updateTime = updateTime;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getCurrentTemperature() {

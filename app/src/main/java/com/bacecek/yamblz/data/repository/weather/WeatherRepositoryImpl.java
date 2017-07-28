@@ -1,10 +1,10 @@
 package com.bacecek.yamblz.data.repository.weather;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.bacecek.yamblz.data.network.WeatherApi;
 import com.bacecek.yamblz.data.network.response.WeatherResponse;
+import com.bacecek.yamblz.data.repository.settings.SettingsManager;
 import com.bacecek.yamblz.util.AppResources;
 import com.bacecek.yamblz.util.Consts;
 import com.bacecek.yamblz.util.Utils;
@@ -27,18 +27,41 @@ public class WeatherRepositoryImpl implements WeatherRepository {
     private RxSharedPreferences rxPreferences;
     private SharedPreferences preferences;
     private AppResources resources;
+    private SettingsManager settingsManager;
 
-    public WeatherRepositoryImpl(Utils utils, WeatherApi api, RxSharedPreferences rxPreferences, SharedPreferences preferences, AppResources resources) {
+    public WeatherRepositoryImpl(Utils utils,
+                                 WeatherApi api,
+                                 RxSharedPreferences rxPreferences,
+                                 SharedPreferences preferences,
+                                 AppResources resources,
+                                 SettingsManager settingsManager) {
         this.utils = utils;
-        weatherApi = api;
+        this.weatherApi = api;
         this.rxPreferences = rxPreferences;
         this.preferences = preferences;
         this.resources = resources;
+        this.settingsManager = settingsManager;
+    }
+
+    @Override
+    public Observable<WeatherResponse> getCurrentWeather() {
+        if (utils.isOnline()) {
+            Timber.d("get weather from api");
+            return settingsManager.getCityCoordsObservable()
+                    .flatMapSingle(cityCoords ->
+                            weatherApi.getCurrentWeather(cityCoords.getLongitude(), cityCoords.getLatitude()))
+                    .subscribeOn(Schedulers.io());
+        } else {
+            Timber.d("get weather from local storage");
+            return rxPreferences.getString(Consts.Prefs.KEY_LAST_WEATHER, "")
+                    .asObservable()
+                    .map(s -> new Gson().fromJson(s, WeatherResponse.class));
+        }
     }
 
     @Override
     public Observable<WeatherResponse> getCurrentWeather(String city) {
-        if(utils.isOnline()) {
+        if (utils.isOnline()) {
             Timber.d("get weather from api");
             return weatherApi.getCurrentWeather(city)
                     .subscribeOn(Schedulers.io());

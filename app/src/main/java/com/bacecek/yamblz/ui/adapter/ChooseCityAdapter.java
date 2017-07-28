@@ -33,8 +33,9 @@ public class ChooseCityAdapter extends RecyclerView.Adapter<ChooseCityAdapter.Ch
 
     @Override
     public ChooseCityViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ChooseCityViewHolder(LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.layout_suggestion_row, parent, false));
+        View view = LayoutInflater.from(parent.getContext()).inflate(
+                R.layout.layout_suggestion_row, parent, false);
+        return new ChooseCityViewHolder(view, listener);
     }
 
     @Override
@@ -54,19 +55,21 @@ public class ChooseCityAdapter extends RecyclerView.Adapter<ChooseCityAdapter.Ch
         notifyItemRangeRemoved(0, count);
     }
 
-    class ChooseCityViewHolder extends RecyclerView.ViewHolder {
+    static class ChooseCityViewHolder extends RecyclerView.ViewHolder {
 
         private TextView cityName;
+        private ChooseCityFragment.OnChooseCityListener listener;
 
-        ChooseCityViewHolder(View itemView) {
+        ChooseCityViewHolder(View itemView, ChooseCityFragment.OnChooseCityListener listener) {
             super(itemView);
 
             cityName = (TextView) itemView.findViewById(R.id.txt_suggestion);
-            itemView.setOnClickListener((view) -> listener.onChooseCity(cities.get(getAdapterPosition())));
+            this.listener = listener;
         }
 
         public void setCity(@NonNull City suggestion) {
             cityName.setText(suggestion.getName());
+            itemView.setOnClickListener((view) -> listener.onChooseCity(suggestion));
         }
     }
 }

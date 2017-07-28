@@ -23,12 +23,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView> {
 
-    public interface WeatherView extends BaseView{
+    public interface WeatherView extends BaseView {
         void showWeatherInfo(@NonNull WeatherInfo weatherInfo);
+
         void hideWeatherInfo();
+
         void showLoading();
+
         void hideLoading();
+
         void showEmptyView();
+
         void hideEmptyView();
     }
 
@@ -36,14 +41,15 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
         App.getAppComponent().inject(this);
         settingsManager.getTemperatureUnitsObservable()
                 .subscribe(units -> {
-                    if(currentWeatherInfo != null && currentWeatherResponse != null) {
+                    if (currentWeatherInfo != null && currentWeatherResponse != null) {
                         double currentTemperature = currentWeatherResponse.getInfo().getCurrentTemperature();
                         currentWeatherInfo.setCurrentTemperature(weatherUtils.convertAndFormatTemperatureFromKelvin(currentTemperature, units));
-                        if(getView() != null) {
+                        if (getView() != null) {
                             getView().showWeatherInfo(currentWeatherInfo);
                         }
                     }
                 });
+        settingsManager.getCityCoordsObservable().subscribe(it -> loadWeather());
     }
 
     @Inject
@@ -70,15 +76,15 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
     @Override
     public void onDetach() {
         super.onDetach();
-        if(getView() != null) {
+        if (getView() != null) {
             getView().hideLoading();
         }
     }
 
     private void getCurrentWeather() {
         //if weather info exists, show it on view. otherwise, load from repository
-        if(currentWeatherInfo != null) {
-            if(getView() != null) {
+        if (currentWeatherInfo != null) {
+            if (getView() != null) {
                 getView().showWeatherInfo(currentWeatherInfo);
             }
         } else {
@@ -117,7 +123,7 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
                     currentWeatherInfo = result;
                     if (getView() != null) {
                         getView().hideLoading();
-                        if(result == null) {
+                        if (result == null) {
                             getView().showEmptyView();
                         } else {
                             getView().hideEmptyView();
@@ -126,7 +132,7 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
                     }
                 }, error -> {
                     currentWeatherInfo = null;
-                    if(getView() != null) {
+                    if (getView() != null) {
                         getView().hideLoading();
                         getView().hideWeatherInfo();
                         getView().showEmptyView();
@@ -135,7 +141,7 @@ public class WeatherPresenter extends BasePresenter<WeatherPresenter.WeatherView
     }
 
     public void onTryAgain() {
-        if(getView() != null) {
+        if (getView() != null) {
             getView().hideEmptyView();
             getView().showLoading();
         }

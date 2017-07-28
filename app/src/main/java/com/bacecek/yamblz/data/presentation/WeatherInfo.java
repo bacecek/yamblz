@@ -40,6 +40,10 @@ public class WeatherInfo {
         return city;
     }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getCurrentTemperature() {
         return currentTemperature;
     }

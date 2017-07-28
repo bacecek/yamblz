@@ -54,8 +54,13 @@ public class PlacesRepositoryImpl implements PlacesRepository {
     public void loadAndSaveCoordsForCity(String placeId) {
         api.place(placeId)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess((response) -> settings.saveCityName(response.getResult().getName()))
+                .doOnSuccess((response) -> {
+                    if (response.getStatus().equals("OK")) {
+                        settings.saveCityName(response.getResult().getName());
+                    } else {
+                        throw new RuntimeException(String.format("Bad response from API: %s", response.getStatus()));
+                    }
+                })
                 .map((it) -> new CityCoords.Builder()
                         .setLongitude(it.getResult().getGeometry().getCoordinates().getLongitude())
                         .setLatitude(it.getResult().getGeometry().getCoordinates().getLatitude())

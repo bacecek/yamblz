@@ -1,12 +1,13 @@
 package com.bacecek.yamblz.data.network.util;
 
+import android.support.annotation.NonNull;
+
 import java.io.IOException;
 
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-import timber.log.Timber;
 
 /**
  * Created by Denis Buzmakov on 12.07.2017.
@@ -15,9 +16,15 @@ import timber.log.Timber;
 
 
 public class KeyInterceptor implements Interceptor {
+
+    @NonNull
+    private String keyName;
+
+    @NonNull
     private String key;
 
-    public KeyInterceptor(String key) {
+    public KeyInterceptor(@NonNull String keyName, @NonNull String key) {
+        this.keyName = keyName;
         this.key = key;
     }
 
@@ -27,7 +34,7 @@ public class KeyInterceptor implements Interceptor {
         HttpUrl originalHttpUrl = original.url();
 
         HttpUrl url = originalHttpUrl.newBuilder()
-                .addQueryParameter("appid", key)
+                .addQueryParameter(keyName, key)
                 .build();
         Request.Builder requestBuilder = original.newBuilder()
                 .url(url);

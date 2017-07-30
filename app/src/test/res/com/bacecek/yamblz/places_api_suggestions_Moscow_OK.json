@@ -1,0 +1,165 @@
+{
+  "predictions": [
+    {
+      "description": "Moscow, Russia",
+      "id": "1a0f08fcbc047354782f00ab52e66fb56d1aadf7",
+      "matched_substrings": [
+        {
+          "length": 6,
+          "offset": 0
+        }
+      ],
+      "place_id": "ChIJybDUc_xKtUYRTM9XV8zWRD0",
+      "reference": "CjQmAAAA6Kyc1iAkA7pv4OggVRIfmTU31hvrpSnGYpQiqnLRZjJ4uqRtyulxlDqCb4dMQe_GEhB9Z_So6FiRF14zzttBGz79GhTODAxGOzXu0oeN_07rCWZYEmPnrw",
+      "structured_formatting": {
+        "main_text": "Moscow",
+        "main_text_matched_substrings": [
+          {
+            "length": 6,
+            "offset": 0
+          }
+        ],
+        "secondary_text": "Russia"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "Moscow"
+        },
+        {
+          "offset": 8,
+          "value": "Russia"
+        }
+      ],
+      "types": [
+        "locality",
+        "political",
+        "geocode"
+      ]
+    },
+    {
+      "description": "Moscow, ID, United States",
+      "id": "a16063c08a41483bd41106ff095008f0b86b6a12",
+      "matched_substrings": [
+        {
+          "length": 6,
+          "offset": 0
+        }
+      ],
+      "place_id": "ChIJ0WHAIi0hoFQRbK3q5g0V_T4",
+      "reference": "CkQxAAAAWu2bziUVHULlE4C0-O1EOyQswE88X_Y0Ike9LNmiYEt8hkWKzjqLMsmVlRWnqmBzK2UrIO70gApeq-uWP3iMGBIQ4i3P3BnroS3h8X14gtTSkBoUiFzkKq6iTv3y6LXlxGlzv_6IAaI",
+      "structured_formatting": {
+        "main_text": "Moscow",
+        "main_text_matched_substrings": [
+          {
+            "length": 6,
+            "offset": 0
+          }
+        ],
+        "secondary_text": "ID, United States"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "Moscow"
+        },
+        {
+          "offset": 8,
+          "value": "ID"
+        },
+        {
+          "offset": 12,
+          "value": "United States"
+        }
+      ],
+      "types": [
+        "locality",
+        "political",
+        "geocode"
+      ]
+    },
+    {
+      "description": "Moscow Mills, MO, United States",
+      "id": "df45f8865e9164273279e10d38efacd0d215d051",
+      "matched_substrings": [
+        {
+          "length": 6,
+          "offset": 0
+        }
+      ],
+      "place_id": "ChIJA280k5i_3ocRe-IAInh_ilY",
+      "reference": "CkQ3AAAADWbmUT_gbqosUhl83SXbuDF7UdMr8nvIxA0oNLc6aCYtfU7Vo-6cKncjp6gD9-UMXvif9AcwP5RwbdiU517DPhIQ0OXH5ZnKBrpjoGDI-dzqYRoUpIaoxCnZX21oxl4QdVbPqA77OPo",
+      "structured_formatting": {
+        "main_text": "Moscow Mills",
+        "main_text_matched_substrings": [
+          {
+            "length": 6,
+            "offset": 0
+          }
+        ],
+        "secondary_text": "MO, United States"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "Moscow Mills"
+        },
+        {
+          "offset": 14,
+          "value": "MO"
+        },
+        {
+          "offset": 18,
+          "value": "United States"
+        }
+      ],
+      "types": [
+        "locality",
+        "political",
+        "geocode"
+      ]
+    },
+    {
+      "description": "Moscow, PA, United States",
+      "id": "e59cddca5a7bc807bef3e73323305a40a31b4d75",
+      "matched_substrings": [
+        {
+          "length": 6,
+          "offset": 0
+        }
+      ],
+      "place_id": "ChIJDaDKkrXCxIkR16VXi1WamHU",
+      "reference": "CkQxAAAAsVKrJekIBqDE_c6KtlZSDUeuBWyLIfC3TOqu3N6w0u5T60f7AOijOReVo-i-WARNKYi_intwwSRsPJy_svNJbBIQB0orgpwDYbbJrJWOyrVjxRoU1qJlSfWeM61d3Y9Gc0ldRGkjt2w",
+      "structured_formatting": {
+        "main_text": "Moscow",
+        "main_text_matched_substrings": [
+          {
+            "length": 6,
+            "offset": 0
+          }
+        ],
+        "secondary_text": "PA, United States"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "Moscow"
+        },
+        {
+          "offset": 8,
+          "value": "PA"
+        },
+        {
+          "offset": 12,
+          "value": "United States"
+        }
+      ],
+      "types": [
+        "locality",
+        "political",
+        "geocode"
+      ]
+    }
+  ],
+  "status": "OK"
+}

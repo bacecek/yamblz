@@ -45,4 +45,26 @@ public class CityCoords {
     public float getLatitude() {
         return latitude;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final CityCoords that = (CityCoords) o;
+
+        return (that.longitude == this.longitude) && (that.latitude == this.latitude);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (longitude != +0.0f ? Float.floatToIntBits(longitude) : 0);
+        result = 31 * result + (latitude != +0.0f ? Float.floatToIntBits(latitude) : 0);
+        return result;
+    }
 }

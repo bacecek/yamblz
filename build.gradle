@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-alpha7'
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha8'
 
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -28,12 +28,13 @@ ext {
     timber_version = '4.5.1'
     okhttp_logging_version = '3.4.0'
     dagger_version = '2.11'
-    arch_components_version = '1.0.0-alpha4'
+    arch_components_version = '1.0.0-alpha5'
     rxprefs_version = '2.0.0-RC2'
     rxbinding_version = '2.0.0'
     stetho_version = '1.5.0'
     crashlytics_version = '2.6.8'
     leakcanary_version = '1.5.1'
+    mockito_version = '2.7.19'
     compileSdk = 25
     minSdk = 16
     targetSdk = 25

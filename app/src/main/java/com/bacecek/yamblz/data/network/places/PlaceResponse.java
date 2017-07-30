@@ -9,14 +9,14 @@ public class PlaceResponse {
 
     @SerializedName("status")
     @NonNull
-    private String status;
+    private PlacesResponseStatus status;
 
     @SerializedName("result")
     @NonNull
     private Result result;
 
     @NonNull
-    public String getStatus() {
+    public PlacesResponseStatus getStatus() {
         return status;
     }
 

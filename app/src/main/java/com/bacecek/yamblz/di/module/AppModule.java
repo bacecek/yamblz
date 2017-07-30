@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.bacecek.yamblz.data.repository.cache.WeatherCache;
+import com.bacecek.yamblz.data.repository.cache.WeatherCacheImpl;
 import com.bacecek.yamblz.data.repository.settings.SettingsManager;
 import com.bacecek.yamblz.data.repository.settings.SettingsManagerImpl;
 import com.bacecek.yamblz.util.AppResources;
@@ -71,5 +73,11 @@ public class AppModule {
     @Singleton
     Utils provideUtils(AppResources resources, SystemServiceProvider serviceProvider) {
         return new Utils(resources, serviceProvider);
+    }
+
+    @Provides
+    @Singleton
+    WeatherCache provideWeatherCache(SharedPreferences preferences, RxSharedPreferences rxPreferences) {
+        return new WeatherCacheImpl(preferences, rxPreferences);
     }
 }

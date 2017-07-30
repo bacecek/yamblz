@@ -3,6 +3,8 @@ package com.bacecek.yamblz.data.repository.places;
 import android.support.annotation.NonNull;
 
 import com.bacecek.yamblz.data.network.PlacesApi;
+import com.bacecek.yamblz.data.network.PlacesApiError;
+import com.bacecek.yamblz.data.network.places.PlacesResponseStatus;
 import com.bacecek.yamblz.data.network.places.Suggestion;
 import com.bacecek.yamblz.data.presentation.City;
 import com.bacecek.yamblz.data.presentation.CityCoords;
@@ -18,6 +20,7 @@ import javax.inject.Singleton;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Created by vandrikeev on 25.07.17.
@@ -39,13 +42,17 @@ public class PlacesRepositoryImpl implements PlacesRepository {
     public Single<List<City>> getSuggestions(String query) {
         return api.suggestions(query)
                 .subscribeOn(Schedulers.io())
-                .map((it) -> {
-                    List<Suggestion> suggestions = it.getSuggestions();
-                    List<City> cities = new ArrayList<>();
-                    for (Suggestion suggestion : suggestions) {
-                        cities.add(new City(suggestion.getDescription(), suggestion.getPlaceId()));
+                .map(response -> {
+                    if (response.getStatus() == PlacesResponseStatus.OK) {
+                        List<Suggestion> suggestions = response.getSuggestions();
+                        List<City> cities = new ArrayList<>();
+                        for (Suggestion suggestion : suggestions) {
+                            cities.add(new City(suggestion.getDescription(), suggestion.getPlaceId()));
+                        }
+                        return cities;
+                    } else {
+                        throw new PlacesApiError(response.getStatus());
                     }
-                    return cities;
                 })
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -54,17 +61,18 @@ public class PlacesRepositoryImpl implements PlacesRepository {
     public void loadAndSaveCoordsForCity(String placeId) {
         api.place(placeId)
                 .subscribeOn(Schedulers.io())
-                .doOnSuccess((response) -> {
-                    if (response.getStatus().equals("OK")) {
+                .doOnSuccess(response -> {
+                    if (response.getStatus() == PlacesResponseStatus.OK) {
                         settings.saveCityName(response.getResult().getName());
                     } else {
-                        throw new RuntimeException(String.format("Bad response from API: %s", response.getStatus()));
+                        throw new PlacesApiError(response.getStatus());
                     }
                 })
                 .map((it) -> new CityCoords.Builder()
                         .setLongitude(it.getResult().getGeometry().getCoordinates().getLongitude())
                         .setLatitude(it.getResult().getGeometry().getCoordinates().getLatitude())
                         .build())
-                .subscribe(cityCoords -> settings.saveCityCoords(cityCoords));
+                .subscribe(cityCoords -> settings.saveCityCoords(cityCoords),
+                        error -> Timber.e(error, "Error while loading place with id %s", placeId));
     }
 }

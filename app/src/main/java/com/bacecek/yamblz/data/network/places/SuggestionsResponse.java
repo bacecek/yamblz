@@ -14,13 +14,13 @@ public class SuggestionsResponse {
 
     @SerializedName("status")
     @NonNull
-    private String status;
+    private PlacesResponseStatus status;
 
     @SerializedName("predictions")
     @NonNull
     private List<Suggestion> suggestions;
 
-    public String getStatus() {
+    public PlacesResponseStatus getStatus() {
         return status;
     }
 

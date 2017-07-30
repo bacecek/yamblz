@@ -1,19 +1,16 @@
 package com.bacecek.yamblz.di.module;
 
-import android.content.SharedPreferences;
-
 import com.bacecek.yamblz.BuildConfig;
 import com.bacecek.yamblz.data.network.PlacesApi;
 import com.bacecek.yamblz.data.network.WeatherApi;
 import com.bacecek.yamblz.data.network.util.KeyInterceptor;
+import com.bacecek.yamblz.data.repository.cache.WeatherCache;
 import com.bacecek.yamblz.data.repository.places.PlacesRepository;
 import com.bacecek.yamblz.data.repository.places.PlacesRepositoryImpl;
 import com.bacecek.yamblz.data.repository.settings.SettingsManager;
 import com.bacecek.yamblz.data.repository.weather.WeatherRepository;
 import com.bacecek.yamblz.data.repository.weather.WeatherRepositoryImpl;
-import com.bacecek.yamblz.util.AppResources;
 import com.bacecek.yamblz.util.Utils;
-import com.f2prateek.rx.preferences2.RxSharedPreferences;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import javax.inject.Named;
@@ -83,16 +80,12 @@ public class NetworkModule {
     @Singleton
     WeatherRepository provideWeatherRepository(Utils utils,
                                                WeatherApi api,
-                                               RxSharedPreferences rxPreferences,
-                                               SharedPreferences preferences,
-                                               AppResources resources,
+                                               WeatherCache weatherCache,
                                                SettingsManager settingsManager) {
         return new WeatherRepositoryImpl(
                 utils,
                 api,
-                rxPreferences,
-                preferences,
-                resources,
+                weatherCache,
                 settingsManager
         );
     }

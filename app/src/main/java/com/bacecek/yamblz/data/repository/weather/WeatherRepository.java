@@ -10,7 +10,6 @@ import io.reactivex.Observable;
  */
 
 public interface WeatherRepository {
-    Observable<WeatherResponse> getCurrentWeather(String city);
     Observable<WeatherResponse> getCurrentWeather();
     void saveLastWeather(WeatherResponse weather);
 }

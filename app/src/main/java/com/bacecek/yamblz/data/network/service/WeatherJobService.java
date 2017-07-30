@@ -1,7 +1,6 @@
 package com.bacecek.yamblz.data.network.service;
 
 import com.bacecek.yamblz.App;
-import com.bacecek.yamblz.R;
 import com.bacecek.yamblz.data.repository.settings.SettingsManager;
 import com.bacecek.yamblz.data.repository.weather.WeatherRepository;
 import com.firebase.jobdispatcher.JobParameters;
@@ -31,7 +30,7 @@ public class WeatherJobService extends JobService {
     @Override
     public boolean onStartJob(JobParameters job) {
         Timber.d("weather job started");
-        weatherRepository.getCurrentWeather(getString(R.string.moscow_request))
+        weatherRepository.getCurrentWeather()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
                     weatherRepository.saveLastWeather(response);
